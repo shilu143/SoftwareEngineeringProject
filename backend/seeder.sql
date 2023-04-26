@@ -1,5 +1,9 @@
+drop schema public cascade;
+create schema public;
+
 create table users(
     id serial primary key,
+    email text,
     name varchar(100),
     gender varchar(1),
     age integer,
@@ -13,7 +17,7 @@ create table communities(
     createdByWhom integer references users(id),
     timeCreated TIMESTAMP,
     category varchar(100),
-    communityProfileImage Text
+    communityProfileImage text
 );
 
 create table posts(
@@ -32,7 +36,8 @@ create table comments(
     parentComment integer,
     writtenText varchar,
     timeCreated TIMESTAMP,
-    votes integer
+    votes integer,
+    postId integer references posts(postid)
 );
 
 create table votePosts(
