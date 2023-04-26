@@ -11,7 +11,7 @@ import {
   Container,
   Flex
 } from '@chakra-ui/react';
-import PostCard from './PostCard/PostCard';
+import PostCards from './PostCard/PostCards';
 
 const Feed = () => {
   const [posts, setPosts] = useState([{}])
@@ -48,15 +48,13 @@ const Feed = () => {
   }, [])
   return (
     <Flex justify={'center'} align = {'center'} px={'10em'} > 
-      <Box p={10} display="flex" flex="1" flexDir="column" bg="blackAlpha.100" maxWidth={'70%'} justify-content={'center'} >
+      <Box p={10} display="flex" flex="1" flexDir="column" bg="blackAlpha.100" maxWidth={'80%'} justify-content={'center'} >
         <Heading as="h1" size="xl" mb={6}>Camp Com Feed</Heading>
         <VStack spacing={6} m={10}>
-          <PostCard />
+          <PostCards /> 
         </VStack>
       </Box>
     </Flex>
-
-
   );
 }
 

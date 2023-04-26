@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
+import PostCard from './PostCard';
 
- function PostCards() {
+function PostCards() {
   return (
-    <div>PostCards</div>
-  )
+    <div>
+      <PostCard postid="12345" />
+      <PostCard postid="12345"/>
+      <PostCard postid="12345"/>
+      {/* Add as many PostCard components as you want */}
+    </div>
+  );
 }
-export default PostCards
+
+export default PostCards;
