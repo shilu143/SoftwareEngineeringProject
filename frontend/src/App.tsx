@@ -1,4 +1,5 @@
 import './App.css'
+import { ChakraProvider } from '@chakra-ui/react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 

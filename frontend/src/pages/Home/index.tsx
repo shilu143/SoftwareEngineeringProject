@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import PostPage from '../PostPage/PostPage'
 
 const Home = () => {
   const [backend, setBackendData] = useState([{}])
@@ -11,8 +12,9 @@ const Home = () => {
   }, [])
   return (
     <>
-      <h1>This is Home Page</h1>
-      <h2> backend data = {backend.toString()}</h2>
+      {/* <h1>This is Home Page</h1> */}
+      {/* <h2> backend data = {backend.toString()}</h2> */}
+      <PostPage />
     </>
   )
 }
