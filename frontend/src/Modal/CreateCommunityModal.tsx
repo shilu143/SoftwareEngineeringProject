@@ -22,6 +22,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { BsPatchCheckFill, BsPatchExclamationFill } from 'react-icons/bs'
+import { UploadButton } from 'react-uploader'
+import { Uploader } from 'uploader'
 
 interface Props {
   open: boolean
@@ -65,6 +67,23 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
     }
   }
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFile(e.target.files[0])
+    }
+  }
+
+  const handleUpload = () => {
+    console.log(selectedFile)
+    // Add your upload logic here
+  }
+  const options = { multi: true }
+
+  const uploader = Uploader({
+    apiKey: 'free',
+  })
   const resetState = () => {
     setCommunityName('')
     setCharsRemaining(25)
@@ -146,6 +165,37 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
                         <TagCloseButton onClick={() => removeTag(index)} />
                       </Tag>
                     ))}
+                  </Box>
+                  <Box>
+                    <Text fontWeight={600} fontSize={15} mt={3}>
+                      Upload a picture for your community
+                    </Text>
+                    <Text fontSize={11} color={'gray.500'} mb={3}>
+                      Accepted file types: JPG, PNG. Maximum file size: 10 MB.
+                    </Text>
+                    <UploadButton
+                      uploader={uploader}
+                      options={options}
+                      onComplete={(files) => {
+                        if (files.length === 0) {
+                          console.log('No files selected.')
+                        } else {
+                          console.log('Files uploaded:')
+                          console.log(files.map((f) => f.fileUrl))
+                        }
+                      }}
+                    >
+                      {({ onClick }) => (
+                        <Button onClick={onClick}>
+                          Upload Pic
+                          <input
+                            type='file'
+                            accept='.png, .jpeg'
+                            style={{ display: 'none' }} // hide the default file input
+                          />
+                        </Button>
+                      )}
+                    </UploadButton>
                   </Box>
                 </Flex>
               </Box>
