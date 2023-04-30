@@ -1,10 +1,10 @@
 // import './PostPage.css'
 import { Box, Flex, Icon, Heading, Text, Button, Center } from '@chakra-ui/react'
+import { EditIcon } from '@chakra-ui/icons'
 import { FaComment, FaShare } from 'react-icons/fa'
 import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
-
-function PostContent() {
+function Posts() {
   return (
     <Box
       bg='white'
@@ -21,7 +21,7 @@ function PostContent() {
       paddingRight='2vh'
       paddingTop='0.5vh'
       flexDirection='row'
-      marginBottom='1vh'
+      marginBottom='0vh'
     >
       <Box
         bg='white'
@@ -66,14 +66,18 @@ function PostContent() {
         display='flex'
         justifyContent='center'
         alignItems='left'
-        paddingBottom='5vh'
+        paddingBottom='0vh'
         flexDirection='column'
       >
+        <Text fontSize='2vh' marginLeft='2vh'>
+          Is there a bright future for Apex without a strong competitive scene?
+        </Text>
         <div
           style={{
             display: 'flex',
             height: '1.5vh',
             marginBottom: '0px',
+            marginLeft: '2vh',
             paddingBottom: '0px',
             alignItems: 'center',
             // justifyContent: 'center',
@@ -83,15 +87,11 @@ function PostContent() {
           <Text fontSize='1.5vh' marginLeft='1.5vh'>
             r/CompetitiveApex
           </Text>
+          <Text fontSize='1.5vh' marginLeft='1.5vh'>
+            Posted By Ganja Pappu
+          </Text>
         </div>
-        <Heading fontSize='4vh' marginLeft='1.5vh' marginTop='2vh'>
-          Is there a bright future for Apex without a strong competitive scene?
-        </Heading>
-        <Text fontSize='2vh' marginLeft='1.5vh'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </Text>
+
         <Flex alignItems='center' mt='2vh'>
           <Icon as={FaComment} fontSize='2vh' color='blue' marginLeft='2vh' />
           <Text fontSize='2vh'>10 comments</Text>
@@ -111,10 +111,26 @@ function PostContent() {
             <Icon as={FaShare} fontSize='3vh' color='blue' />
             <Text fontSize='2vh'>Share</Text>
           </Button>
+          <Button
+            bg='transparent'
+            borderColor='transparent'
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            h='5vh'
+            w='fit-content'
+            paddingLeft='0.5vh'
+            marginLeft='1vh'
+            _hover={{ backgroundColor: '#d1d1d1' }}
+            style={{ transition: 'ound-color 0.3s, color 0.3s' }}
+          >
+            <Icon as={EditIcon} fontSize='3vh' color='blue' />
+            <Text fontSize='2vh'>Edit</Text>
+          </Button>
         </Flex>
       </Box>
     </Box>
   )
 }
 
-export default PostContent
+export default Posts

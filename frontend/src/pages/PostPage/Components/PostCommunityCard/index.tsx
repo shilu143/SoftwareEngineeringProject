@@ -1,10 +1,13 @@
 // import './PostPage.css'
+import { useEffect, useRef } from 'react'
 import { Box, Flex, Icon, Heading, Text, Button, Center } from '@chakra-ui/react'
 import { FaComment, FaShare } from 'react-icons/fa'
 import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
 
 function PostCommunityCard() {
+  const divRef = useRef(null)
+
   return (
     <Box
       bg='white'
@@ -19,6 +22,22 @@ function PostCommunityCard() {
       marginLeft='10vh'
       border='0.5vh solid red'
     >
+      <div
+        style={{
+          display: 'flex',
+          backgroundColor: 'red',
+          height: '5vh',
+          marginBottom: '0px',
+          paddingBottom: '0px',
+          alignItems: 'center',
+          color: 'white',
+          // justifyContent: 'center',
+        }}
+      >
+        <Text fontSize='2vh' marginLeft='2vh' fontWeight='bold'>
+          About Community
+        </Text>
+      </div>
       <div
         style={{
           display: 'flex',
@@ -66,7 +85,7 @@ function PostCommunityCard() {
       <div
         style={{
           display: 'flex',
-          height: '6vh',
+          height: 'auto',
           marginBottom: '0px',
           paddingBottom: '0px',
           alignItems: 'center',
@@ -74,38 +93,45 @@ function PostCommunityCard() {
         }}
       >
         <div
+          ref={divRef}
           style={{
             display: 'flex',
-            height: '6vh',
+            height: 'auto',
+            width: '100%',
             marginBottom: '0px',
+            marginTop: '1vh',
+            marginLeft: '1.5vh',
+            marginRight: '2vh',
             paddingBottom: '0px',
-            alignItems: 'center',
+            // alignItems: 'center',
             flexDirection: 'column',
-            // justifyContent: 'center',
+            // justifyContent: 'space-between',
           }}
         >
-          {/* <Icon as={SiRiotgames} color='red' fontSize='4vh' /> */}
           <Text
-            fontSize='3vh'
-            h='3vh'
-            marginLeft='1.5vh'
+            fontSize='2.5vh'
+            h='2vh'
+            // flex={1}
             w='100%'
             fontWeight='light'
             //   color='gray'
             marginRight='2vh'
+            marginTop='1vh'
+            marginBottom='0vh'
             //   borderBottom='0.25vh solid gray'
           >
-            694.20
+            95.1k
           </Text>
           <Text
             fontSize='2vh'
-            h='3vh'
-            marginLeft='1.5vh'
+            // flex={1}
+            h='2vh'
+            marginTop='1vh'
+            paddingBottom='3.5vh'
             w='100%'
             fontWeight='light'
             color='gray'
-            marginRight='2vh'
-            borderBottom='0.25vh solid gray'
+            borderBottom='0.1vh solid gray'
           >
             Members
           </Text>
