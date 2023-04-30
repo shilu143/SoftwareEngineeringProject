@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
 import axios from 'axios'
 import {
   Box,
@@ -9,6 +11,7 @@ import {
   StackDivider,
   Heading,
   Container,
+  Button,
   Flex
 } from '@chakra-ui/react';
 import PostCards from './PostCard/PostCards';
@@ -37,6 +40,11 @@ const Feed = () => {
         <Flex justify="center" align="center" px="10em">
           <Box p={100} display="flex" flex="1" flexDir="column" maxWidth="100%">
             <Heading as="h1" size="xl" mb={6}>Camp Com Feed</Heading>
+            <Link to="/addpost  ">
+              <Button leftIcon={<FaPlus />} colorScheme="blue">
+                Create Post
+              </Button>
+            </Link>
             <VStack spacing={6} m={10}>
               <PostCards />
             </VStack>
