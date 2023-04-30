@@ -8,7 +8,8 @@ create table users(
     gender varchar(1),
     age integer,
     password varchar(100),
-    profileImage text
+    profileImage text,
+    communities integer[]
 );
 
 create table communities(
@@ -16,7 +17,7 @@ create table communities(
     comName varchar(100),
     createdByWhom integer references users(id),
     timeCreated TIMESTAMP,
-    category varchar(100),
+    category text[],
     communityProfileImage text
 );
 
@@ -54,3 +55,4 @@ create table communityUser(
     userId integer references users(id),
     comId integer references communities(comId)
 );
+

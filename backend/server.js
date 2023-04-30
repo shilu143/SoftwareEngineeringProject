@@ -52,7 +52,7 @@ const client = new Client({
 client.connect();
 
 /*login api*/
-app.post("/loginCheck",verifyToken,async (req,res)=>{
+app.post("/loginCheck",async (req,res)=>{
 	const email=req.body.email,password = req.body.password;
 	console.log(req.body);
 	var query = `select count(*) from users where email='${email}' and password='${password}'`;
@@ -136,6 +136,7 @@ app.post("/testImgUpload",upload.single('profile'),async(req,res)=>{
 	}) ;
 });
 
+/*insert user*/
 app.post("/userSignUp",upload.single('profile'),async (req,res)=>{
 	console.log(req.body)
 	const name = req.body.name,gender=req.body.gender,age=req.body.age,password=req.body.password,email=req.body.email;
@@ -156,6 +157,8 @@ app.post("/userSignUp",upload.single('profile'),async (req,res)=>{
 		});
 });
 
+
+/**/
 app.get("/fetchUserCommunity",verifyToken,(req,res)=>{
 	const userId = req.query.userId;
 	/*fetch communities for a particular user*/
@@ -170,6 +173,7 @@ app.get("/fetchUserCommunity",verifyToken,(req,res)=>{
 		});
 });
 
+/*fetch posts of a commuity*/
 app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
 	/*work to be done here*/
 	const comId = req.userEmail;
@@ -182,6 +186,50 @@ app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
 			res.status(200).json(results.rows);
 		  }
 	});
+});
+
+/*api to check whether a community exists*/
+app.get("/checkSameNameCommunity",verifyToken,(req,res)=>{
+	const comName = req.body.comName;
+	console.log("Community name from frontend="+comName);
+	client.query('select * from communities where comName=$1',[comName],(error,results)=>{
+		if(error){
+			console.error(error);
+			res.status(500).send("Error fetching posts of a community");
+		}
+		else{
+			console.log(`${results.rowCount}`);
+			if(results.rowCount>0){
+				res.json({exists:false});
+			}else{
+				res.json({exists:true});
+			}
+		}
+	});
+});
+
+/*api to insert into a community into the database*/
+app.post("/insertCommunityInDatabase",upload.single('profile'),async (req,res)=>{
+	const name = req.body.comName,creatorName=req.body.creatorName;
+	const profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;	
+	console.log("yo");
+	console.log(`${req.body.category}`);
+	const category =req.body.category;
+	// console.log(typeof(category));
+
+	try {
+		const user = await client.query("select * from users where name=$1", [creatorName]);
+		const userId = user.rows[0].id;
+		await client.query("insert into communities(comName, createdByWhom, timeCreated, category, communityProfileImage) values($1, $2, CURRENT_TIMESTAMP, $3, $4)", [name, userId, category, profile_img_url]);
+		const comIdData = await client.query("select * from communities where comName=$1",[name]);
+		const comId = comIdData.rows[0].comid;
+		console.log(comId);
+		await client.query("insert into communityUser values($1,$2)",[userId,comId]);
+		res.status(200).send("Community created successfully");
+	  } catch (error) {
+		console.error(error);
+		res.status(500).send("Error inserting data into the communities table");
+	  }
 });
 
 /*handle multer error globally*/
