@@ -13,7 +13,7 @@ function Directory() {
         padding={'0.5em 1em'}
         borderRadius={4}
         bg={'black'}
-        mr={'1em'}
+        mx={'0.5em'}
         _hover={{ outline: '1px solid', outlineColor: 'palette.200' }}
       >
         <Flex align={'center'} justify={'space-between'} width={{ base: 'auto', lg: '200px' }}>
