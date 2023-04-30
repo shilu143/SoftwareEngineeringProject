@@ -20,6 +20,7 @@ function PostCard({postid}:Props    ) {
     const [community, setCommunity] = useState('community')
     const [postedby, setPostedby] = useState('react')
     const [postTime, setPostTime] = useState('time')
+    const [postCaption, setPostCaption] = useState('Caption')
     
     
     useEffect(() => {
@@ -90,9 +91,9 @@ function PostCard({postid}:Props    ) {
                         <Text fontSize="md" ml={2} mr={4}>{dislikes} Dislikes</Text>
                     </Flex>
                 </Flex>
-                <Flex justify={'center'} align={'center'} mt={5} onClick={handleCommentClick} _hover={{ cursor: 'pointer' }}>
-                    <Icon as={FaComment} color={'gray.500'} />
-                    <Text fontSize="md" ml={2} mr={4} >{comments} Comments</Text>
+                <Flex justify={'center'} align={'center'} mt={5} >
+                    <Icon as={FaComment} color={'gray.500'} onClick={handleCommentClick} _hover={{ cursor: 'pointer' }} />
+                    <Text fontSize="md" ml={2} mr={4} onClick={handleCommentClick} _hover={{ cursor: 'pointer' }} >{comments} Comments</Text>
                 </Flex>
 
             </Box>
