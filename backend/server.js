@@ -38,7 +38,7 @@ function verifyToken(req,res,next){
 		res.send({result:"Please add token with header"});
 	}
 	// console.log(token_from_frontend)
-	console.warn("Middleware called!"+token);
+	// console.warn("Middleware called!"+token);
 	
 }
 
@@ -158,12 +158,16 @@ app.post("/userSignUp",upload.single('profile'),async (req,res)=>{
 });
 
 
-/**/
-app.get("/fetchUserCommunity",verifyToken,(req,res)=>{
-	const userId = req.query.userId;
+/*fetch community of a USER*/
+app.get("/fetchUserCommunity",verifyToken,async (req,res)=>{
+	const userEmail = req.userEmail;
 	/*fetch communities for a particular user*/
+	
+	const userIdData = await client.query("select * from users where email=$1",[userEmail]);
+	const userId = userIdData.rows[0].id;
+
 	client.query(
-		'select * from communityUser where userId=$1',[userId],(error,results)=>{
+		'select comName from communityUser as c,communities as com where c.userId=$1 and c.comId=com.comId',[userId],(error,results)=>{
 			if (error) {
 				console.error(error);
 				res.status(500).send("Error fetching commuity for users");

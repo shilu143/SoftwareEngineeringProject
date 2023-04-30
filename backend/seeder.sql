@@ -9,7 +9,6 @@ create table users(
     age integer,
     password varchar(100),
     profileImage text,
-    communities integer[]
 );
 
 create table communities(
