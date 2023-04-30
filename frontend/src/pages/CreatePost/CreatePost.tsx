@@ -51,6 +51,9 @@ import {
                   value={content}
                   onChange={(event) => setContent(event.target.value)}
                   required
+                  size="lg"
+                  h="200px"
+                  overflow="auto"
                 />
                 <UploadButton
                   uploader={uploader}
