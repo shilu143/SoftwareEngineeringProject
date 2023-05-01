@@ -4,13 +4,13 @@ import Layout from '../../Layout'
 import { Heading, Text, VStack } from '@chakra-ui/layout'
 
 const Home = () => {
-  const [backend, setBackendData] = useState([{}])
-  useEffect(() => {
-    axios.get('/api').then((res) => {
-      console.log(res.data)
-      setBackendData(res.data)
-    })
-  }, [])
+  // const [backend, setBackendData] = useState([{}])
+  // useEffect(() => {
+  //   axios.get('/api').then((res) => {
+  //     console.log(res.data)
+  //     setBackendData(res.data)
+  //   })
+  // }, [])
   return (
     <>
       <Layout>
@@ -20,7 +20,7 @@ const Home = () => {
           </Heading>
           <Text textAlign={'center'} fontSize={'1.5em'}>
             {' '}
-            backend data = {backend.toString()}
+            {/* backend data = {backend.toString()} */}
           </Text>
         </VStack>
       </Layout>

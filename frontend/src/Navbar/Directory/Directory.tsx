@@ -1,11 +1,21 @@
 import { ChevronDownIcon, Icon } from '@chakra-ui/icons'
 import { Flex, Text } from '@chakra-ui/layout'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TiHome } from 'react-icons/ti'
 import Communities from './Communities'
+import { AuthContext } from '../../hooks/useAuth'
+import axios from 'axios'
+interface Community {
+  comid: number
+  comname: string
+  category: string[]
+  communityprofileimage: string
+  timeCreated: string
+}
 
 function Directory() {
+  // handleChange()
   return (
     <Menu>
       <MenuButton

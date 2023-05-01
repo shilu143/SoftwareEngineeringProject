@@ -1,16 +1,19 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import { useAuth, AuthContext } from './hooks/useAuth'
 import Home from './pages/Home'
 
 function App() {
-  // Add an empty dependency array to trigger the effect only once
+  const userToken = useAuth()
 
   return (
-    <div className='App'>
-      <Routes>
-        <Route path='/' element=<Home /> />
-      </Routes>
-    </div>
+    <AuthContext.Provider value={userToken}>
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </div>
+    </AuthContext.Provider>
   )
 }
 

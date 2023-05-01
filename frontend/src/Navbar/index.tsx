@@ -17,14 +17,14 @@ const Navbar = () => {
         <img src='/logo512.png' alt='Logo' width={32} height={32} /> */}
       <Box as='span' ml={2} fontWeight='bold' fontSize={24} display={{ base: 'none', md: 'unset' }}>
         Reddit
-      </Box>  
+      </Box>
       {/* </Flex> */}
-      {/* <Spacer /> */}
-      {/* <Spacer /> */}
+      {/* <Spacer />
+      <Spacer /> */}
       {/* <Flex width={'100vw'} position={'fixed'} justify={'center'}> */}
       <SearchInput />
-      <RightContent />
       {/* <Spacer /> */}
+      <RightContent />
       {/* </Flex> */}
     </Flex>
   )

@@ -19,11 +19,13 @@ import {
   TagCloseButton,
   TagLabel,
   Text,
+  useToast,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useContext, useState } from 'react'
 import { BsPatchCheckFill, BsPatchExclamationFill } from 'react-icons/bs'
-import { UploadButton } from 'react-uploader'
-import { Uploader } from 'uploader'
+import { AvatarWithFileManager } from '../components/FileUploader'
+import { AuthContext, useAuth } from '../hooks/useAuth'
 
 interface Props {
   open: boolean
@@ -31,18 +33,31 @@ interface Props {
 }
 
 const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [avatarSrc, setAvatarSrc] = useState<string>('')
   const [communityName, setCommunityName] = useState('')
   const [charsRemaining, setCharsRemaining] = useState(25)
   const [validCommunity, setValidCommunity] = useState(false)
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 25) {
-      setCommunityName(event.target.value)
-      setCharsRemaining(25 - event.target.value.length)
-    }
-  }
   const [tags, setTags] = useState<string[]>([])
   const [tagInput, setTagInput] = useState('')
   const [tagError, setTagError] = useState(false)
+  const userToken = useContext(AuthContext)
+  const toast = useToast()
+
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length <= 25) {
+      setCommunityName(event.target.value)
+      setCharsRemaining(25 - event.target.value.length)
+      const params = { comName: event.target.value }
+      const headers = { Authorization: `Bearer ${userToken}` } // Add the token to the headers
+      if (event.target.value.length !== 0) {
+        const response = await axios.get('/checkSameNameCommunity', { params, headers })
+        setValidCommunity(response.data.exists)
+      } else {
+        setValidCommunity(false)
+      }
+    }
+  }
 
   const addTag = () => {
     if (tagInput.trim() !== '' && !tags.includes(tagInput)) {
@@ -66,24 +81,51 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
       addTag()
     }
   }
-
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFile(e.target.files[0])
+  const handleCreateCommunity = async () => {
+    const formData = new FormData()
+    formData.append('profile', selectedFile as File)
+    formData.append('comName', communityName)
+    for (let i = 0; i < tags.length; i++) {
+      formData.append('category', tags[i])
     }
+    const headers = { Authorization: `Bearer ${userToken}` }
+    axios
+      .post('/insertCommunityInDatabase', formData, { headers })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.status)
+          toast({
+            title: 'Community Created',
+            description: `Name : ${communityName}`,
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+          })
+        } else if (response.status === 500) {
+          console.log('Error')
+          toast({
+            title: 'Failed to Create Community',
+            description: 'An error occurred while creating the community',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        toast({
+          title: 'Failed to Create Community',
+          description: 'An error occurred while creating the community',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+      })
+    resetState()
+    handleClose()
   }
 
-  const handleUpload = () => {
-    console.log(selectedFile)
-    // Add your upload logic here
-  }
-  const options = { multi: true }
-
-  const uploader = Uploader({
-    apiKey: 'free',
-  })
   const resetState = () => {
     setCommunityName('')
     setCharsRemaining(25)
@@ -91,6 +133,8 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
     setTags([])
     setTagInput('')
     setTagError(false)
+    setSelectedFile(null)
+    setAvatarSrc('')
   }
   return (
     <>
@@ -101,6 +145,21 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
           <Box pl={3} pr={3}>
             <ModalCloseButton />
             <ModalBody display={'flex'} flexDirection={'column'} py={'10px'}>
+              <Flex width={'100%'} justify={'center'} align='center' flexDir={'column'}>
+                <AvatarWithFileManager
+                  avatarSrc={avatarSrc}
+                  setAvatarSrc={setAvatarSrc}
+                  selectedFile={selectedFile}
+                  setSelectedFile={setSelectedFile}
+                />
+                <Text fontWeight={600} fontSize={15} mt={3}>
+                  Upload a picture for your community
+                </Text>
+                <Text fontSize={11} color={'gray.500'} mb={5}>
+                  Accepted file types: JPG, PNG. Maximum file size: 10 MB.
+                </Text>
+              </Flex>
+
               <Text fontWeight={600} fontSize={15}>
                 Name
               </Text>
@@ -166,37 +225,6 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
                       </Tag>
                     ))}
                   </Box>
-                  <Box>
-                    <Text fontWeight={600} fontSize={15} mt={3}>
-                      Upload a picture for your community
-                    </Text>
-                    <Text fontSize={11} color={'gray.500'} mb={3}>
-                      Accepted file types: JPG, PNG. Maximum file size: 10 MB.
-                    </Text>
-                    <UploadButton
-                      uploader={uploader}
-                      options={options}
-                      onComplete={(files) => {
-                        if (files.length === 0) {
-                          console.log('No files selected.')
-                        } else {
-                          console.log('Files uploaded:')
-                          console.log(files.map((f) => f.fileUrl))
-                        }
-                      }}
-                    >
-                      {({ onClick }) => (
-                        <Button onClick={onClick}>
-                          Upload Pic
-                          <input
-                            type='file'
-                            accept='.png, .jpeg'
-                            style={{ display: 'none' }} // hide the default file input
-                          />
-                        </Button>
-                      )}
-                    </UploadButton>
-                  </Box>
                 </Flex>
               </Box>
             </ModalBody>
@@ -205,8 +233,8 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
             <Button
               mr={3}
               onClick={() => {
-                handleClose()
                 resetState()
+                handleClose()
               }}
             >
               Cancel
@@ -216,6 +244,7 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
               border={'1px solid white'}
               cursor={!validCommunity ? 'not-allowed' : 'cursor'}
               isDisabled={!validCommunity}
+              onClick={handleCreateCommunity}
             >
               Create Community
             </Button>

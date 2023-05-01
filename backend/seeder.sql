@@ -1,57 +1,60 @@
-drop schema public cascade;
-create schema public;
+-- Drop the public if it exists
+DROP SCHEMA IF EXISTS public CASCADE;
 
-create table users(
-    id serial primary key,
-    email text,
-    name varchar(100),
-    gender varchar(1),
-    age integer,
-    password varchar(100),
-    profileImage text,
+-- Create the new schema
+CREATE SCHEMA public;
+
+-- Create the tables in the new schema
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email TEXT,
+  name VARCHAR(100),
+  gender VARCHAR(1),
+  age INTEGER,
+  password VARCHAR(100),
+  profileImage TEXT
 );
 
-create table communities(
-    comId serial primary key,
-    comName varchar(100),
-    createdByWhom integer references users(id),
-    timeCreated TIMESTAMP,
-    category text[],
-    communityProfileImage text
+CREATE TABLE communities (
+  comId SERIAL PRIMARY KEY,
+  comName VARCHAR(100),
+  createdByWhom INTEGER REFERENCES users(id),
+  timeCreated TIMESTAMP,
+  category TEXT[],
+  communityProfileImage TEXT
 );
 
-create table posts(
-    postId serial primary key,
-    comId integer references communities(comId),
-    postTitle varchar(100),
-    createdByWhom integer references users(id),
-    timeCreated TIMESTAMP,
-    votes integer,
-    postImage text
+CREATE TABLE posts (
+  postId SERIAL PRIMARY KEY,
+  comId INTEGER REFERENCES communities(comId),
+  postTitle VARCHAR(100),
+  createdByWhom INTEGER REFERENCES users(id),
+  timeCreated TIMESTAMP,
+  votes INTEGER,
+  postImage TEXT
 );
 
-create table comments(
-    commentId serial primary key,
-    createdByWhom integer references users(id),
-    parentComment integer,
-    writtenText varchar,
-    timeCreated TIMESTAMP,
-    votes integer,
-    postId integer references posts(postid)
+CREATE TABLE comments (
+  commentId SERIAL PRIMARY KEY,
+  createdByWhom INTEGER REFERENCES users(id),
+  parentComment INTEGER,
+  writtenText VARCHAR,
+  timeCreated TIMESTAMP,
+  votes INTEGER,
+  postId INTEGER REFERENCES posts(postId)
 );
 
-create table votePosts(
-    postId integer references posts(postId),
-    userId integer references users(id)
+CREATE TABLE votePosts (
+  postId INTEGER REFERENCES posts(postId),
+  userId INTEGER REFERENCES users(id)
 );
 
-create table voteComments(
-    commentId integer references comments(commentId),
-    userId integer references users(id)
+CREATE TABLE voteComments (
+  commentId INTEGER REFERENCES comments(commentId),
+  userId INTEGER REFERENCES users(id)
 );
 
-create table communityUser(
-    userId integer references users(id),
-    comId integer references communities(comId)
+CREATE TABLE communityUser (
+  userId INTEGER REFERENCES users(id),
+  comId INTEGER REFERENCES communities(comId)
 );
-

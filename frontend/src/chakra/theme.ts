@@ -73,10 +73,26 @@ const colors = {
   },
 }
 
+const styles = {
+  global: {
+    '::-webkit-scrollbar': {
+      width: '6px',
+    },
+    '::-webkit-scrollbar-track': {
+      width: '6px',
+      backgroundColor: 'black',
+    },
+    '::-webkit-scrollbar-thumb': {
+      backgroundColor: 'gray.500',
+      borderRadius: '3px',
+    },
+  },
+}
+
 const components = {
   Button,
 }
 
-const theme = extendTheme({ config, colors, components })
+const theme = extendTheme({ config, colors, components, styles })
 
 export default theme
