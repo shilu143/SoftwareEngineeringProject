@@ -8,25 +8,11 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import {
-  Box,
-  Flex,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Tag,
-  TagCloseButton,
-  TagLabel,
-  Text,
-  useToast,
-} from '@chakra-ui/react'
+import { Box, Flex, Input, InputGroup, Text, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { BsPatchCheckFill, BsPatchExclamationFill } from 'react-icons/bs'
-import { AvatarWithFileManager } from '../components/FileUploader'
-import { AuthContext, useAuth } from '../hooks/useAuth'
 import PasswordInput from '../components/PasswordInput'
+import { AuthContext } from '../hooks/useAuth'
 
 interface Props {
   open: boolean
@@ -163,7 +149,28 @@ const LoginModal: React.FC<Props> = ({ open, handleClose }) => {
                 <Text fontWeight={600} fontSize={15} mb={2}>
                   Password
                 </Text>
-                <PasswordInput />
+                <PasswordInput
+                  formData={{
+                    name: '',
+                    gender: '',
+                    age: 0,
+                    password: '',
+                    email: '',
+                    profile: null,
+                  }}
+                  setFormData={function (
+                    value: React.SetStateAction<{
+                      name: string
+                      gender: string
+                      age: number
+                      password: string
+                      email: string
+                      profile: File | null
+                    }>,
+                  ): void {
+                    throw new Error('Function not implemented.')
+                  }}
+                />
               </Flex>
             </ModalBody>
           </Box>

@@ -74,7 +74,7 @@ app.post("/loginCheck", async (req, res) => {
 			res.status(500).send("Error! Try again");
 		} else {
 			const ct = results.rows[0].count;
-			console.log("dasdf",ct);
+			console.log("dasdf", ct);
 			if (ct == 1) {
 				jwt.sign(
 					{ email: email },
@@ -163,8 +163,9 @@ app.post("/userSignUp", upload.single("profile"), async (req, res) => {
 		age = req.body.age,
 		password = req.body.password,
 		email = req.body.email;
-
+	// console.log(req.file);
 	const profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;
+	// console.log("profile image = ", profile_img_url);
 	console.log("Age " + age);
 
 	/*signup the user*/
@@ -183,47 +184,62 @@ app.post("/userSignUp", upload.single("profile"), async (req, res) => {
 });
 
 /*post click action api,it will send the data of the complete post,including comment count*/
-app.get("/returnDetailsOfAPost",verifyToken,async (req,res)=>{
+app.get("/returnDetailsOfAPost", verifyToken, async (req, res) => {
 	const postId = req.query.postId;
 	let commentCount = 0;
 	console.log(postId);
-	commentCount = await client.query("select count(*) from comments where postId=$1",[postId]);
-	let commentRows = await client.query("select * from comments where postid=$1",[postId]);
-	const communityId = await client.query("select * from posts where postId=$1",[postId]);
+	commentCount = await client.query(
+		"select count(*) from comments where postId=$1",
+		[postId]
+	);
+	let commentRows = await client.query(
+		"select * from comments where postid=$1",
+		[postId]
+	);
+	const communityId = await client.query(
+		"select * from posts where postId=$1",
+		[postId]
+	);
 	// console.log(communityId);
-	const result = communityId.rows.map(row=>({
+	const result = communityId.rows.map((row) => ({
 		...row,
-		commentCount : commentCount.rows[0].count,
-		commentRows : commentRows.rows
+		commentCount: commentCount.rows[0].count,
+		commentRows: commentRows.rows,
 	}));
 	// console.log(result);
 	res.status(200).send(result);
 });
 
 /*insert comments, called when a comment is added*/
-app.post("/insertCommentByUserAtAPost",verifyToken,async (req,res)=>{
+app.post("/insertCommentByUserAtAPost", verifyToken, async (req, res) => {
 	console.log(req.body);
-	let createdByWhom=req.userEmail,parentComment=req.body.parentComment,text=req.body.text,postId=req.body.postId;
-	let userId=await client.query("select * from users where email=$1",[createdByWhom]);
+	let createdByWhom = req.userEmail,
+		parentComment = req.body.parentComment,
+		text = req.body.text,
+		postId = req.body.postId;
+	let userId = await client.query("select * from users where email=$1", [
+		createdByWhom,
+	]);
 	userId = userId.rows[0].id;
-	await client.query("insert into comments(createdByWhom,parentComment,writtenText,timeCreated,votes,postId) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",[userId,parentComment,text,postId],(error,results)=>{
-		if(error){
-			console.log(error);
-			res.status(500).send("Error adding comment");
+	await client.query(
+		"insert into comments(createdByWhom,parentComment,writtenText,timeCreated,votes,postId) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",
+		[userId, parentComment, text, postId],
+		(error, results) => {
+			if (error) {
+				console.log(error);
+				res.status(500).send("Error adding comment");
+			} else {
+				res.status(200).send("Comment added successfully");
+			}
 		}
-		else{
-			res.status(200).send("Comment added successfully");
-		}
-	});
+	);
 });
 
-
-
 /*send post ids of a commuity to front end*/
-app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
+app.get("/fetchPostsOfCommunity", verifyToken, (req, res) => {
 	/*work to be done here*/
 	const comId = req.query.comId;
-	console.log("Community id="+comId);
+	console.log("Community id=" + comId);
 	client.query(
 		"select * from posts where comId=$1",
 		[comId],
@@ -248,7 +264,6 @@ app.get("/fetchCommunities", verifyToken, (req, res) => {
 				WHERE u.email = '${userEmail}'
 				`;
 	client.query(query, (error, results) => {
-
 		if (error) {
 			console.error(error);
 			res.status(500).send("Error fetching user communities");
@@ -259,33 +274,41 @@ app.get("/fetchCommunities", verifyToken, (req, res) => {
 });
 
 /*create post by a user in a community*/
-app.post("/insertPostForACommunity",verifyToken,upload.single('profile'),async (req,res)=>{
-	const creatorEmail=req.userEmail;
-	const title = req.body.title;
-	const comId = req.body.comId;
-	let profile_img_url = "" ;
-	console.log(title,comId);
-	let creatorId = await client.query("select * from users where email=$1",[creatorEmail]);
-	creatorId = creatorId.rows[0].id;
-	if(req.file==undefined){
-		console.log("yo vro!");
-		profile_img_url = "";
-	}
-	else{
-		profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;
-	}
-	client.query("insert into posts(comId,postTitle,createdByWhom,timeCreated,votes,postImage) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",[comId,title,creatorId,profile_img_url],(error,results)=>{
-		if(error){
-			console.log(error)
-			res.status(500).send("Error inserting posts");
+app.post(
+	"/insertPostForACommunity",
+	verifyToken,
+	upload.single("profile"),
+	async (req, res) => {
+		const creatorEmail = req.userEmail;
+		const title = req.body.title;
+		const comId = req.body.comId;
+		let profile_img_url = "";
+		console.log(title, comId);
+		let creatorId = await client.query(
+			"select * from users where email=$1",
+			[creatorEmail]
+		);
+		creatorId = creatorId.rows[0].id;
+		if (req.file == undefined) {
+			console.log("yo vro!");
+			profile_img_url = "";
+		} else {
+			profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;
 		}
-		else{
-			res.status(200).send("Posts inserted successfully");
-		}
-	});	
-});
-
-
+		client.query(
+			"insert into posts(comId,postTitle,createdByWhom,timeCreated,votes,postImage) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",
+			[comId, title, creatorId, profile_img_url],
+			(error, results) => {
+				if (error) {
+					console.log(error);
+					res.status(500).send("Error inserting posts");
+				} else {
+					res.status(200).send("Posts inserted successfully");
+				}
+			}
+		);
+	}
+);
 
 /*api to check whether a community exists*/
 app.get("/checkSameNameCommunity", verifyToken, (req, res) => {
@@ -319,6 +342,7 @@ app.post(
 	verifyToken,
 	upload.single("profile"),
 	async (req, res) => {
+		console.log(req.body);
 		const name = req.body.comName;
 		let profile_img_url;
 		if (req.file) {

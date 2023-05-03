@@ -12,6 +12,8 @@ import {
 import {
   Box,
   Flex,
+  FormControl,
+  FormLabel,
   HStack,
   Input,
   InputGroup,
@@ -30,7 +32,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { AvatarWithFileManager } from '../components/FileUploader'
 import PasswordInput from '../components/PasswordInput'
 import { AuthContext } from '../hooks/useAuth'
@@ -40,39 +42,92 @@ interface Props {
   handleClose: () => void
 }
 
+type FormData = {
+  name: string
+  gender: string
+  age: number
+  password: string
+  email: string
+  profile: File | null
+}
+
 const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
-  const options = ['Male', 'Female', 'Others']
+  const options = ['M', 'F']
   const [selectedOption, setSelectedOption] = useState('Gender')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [avatarSrc, setAvatarSrc] = useState<string>('')
-  const [communityName, setCommunityName] = useState('')
-  const [charsRemaining, setCharsRemaining] = useState(25)
-  const [validCommunity, setValidCommunity] = useState(false)
-  const userToken = useContext(AuthContext)
+  const [validCommunity, setValidCommunity] = useState(true)
   const toast = useToast()
 
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 25) {
-      setCommunityName(event.target.value)
-      setCharsRemaining(25 - event.target.value.length)
-      const params = { comName: event.target.value }
-      const headers = { Authorization: `Bearer ${userToken}` } // Add the token to the headers
-      if (event.target.value.length !== 0) {
-        const response = await axios.get('/checkSameNameCommunity', { params, headers })
-        setValidCommunity(response.data.exists)
-      } else {
-        setValidCommunity(false)
-      }
-    }
+  const handleSignUp = async () => {
+    formData['profile'] = selectedFile as File
+    // const fd = new FormData()
+    // fd.append('profile', selectedFile as File)
+    // fd.append('name', formData.name)
+    // fd.append('age', formData.age.toString())
+    // fd.append('email', formData.email)
+    // fd.append('gender', formData.gender)
+    // fd.append('password', formData.password)
+
+    const response = await axios.post('/userSignUp', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    console.log(response.data)
+    toast({
+      title: 'Sign Up Successful',
+      description: `User : ${formData.email}`,
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    })
+    handleClose()
   }
 
   const resetState = () => {
-    setCommunityName('')
-    setCharsRemaining(25)
-    setValidCommunity(false)
     setSelectedFile(null)
-    setAvatarSrc('')
   }
+
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    gender: '',
+    age: 10,
+    password: '',
+    email: '',
+    profile: null,
+  })
+
+  const [error, setError] = useState('')
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      name: event.target.value,
+    }))
+  }
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      email: event.target.value,
+    }))
+  }
+
+  const handleAgeChange = (valueAsString: string, valueAsNumber: number) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      age: valueAsNumber,
+    }))
+  }
+
+  useEffect(() => {
+    if (selectedOption !== 'Gender') {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        gender: selectedOption,
+      }))
+    }
+  }, [selectedOption])
+
   return (
     <>
       <Modal isOpen={open} onClose={handleClose}>
@@ -97,80 +152,90 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
                 </Text>
               </Flex>
 
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  Name
-                </Text>
-                <InputGroup>
-                  <Input value={communityName} onChange={handleChange} placeholder='Enter Name' />
-                </InputGroup>
-              </Flex>
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  Email
-                </Text>
-                <InputGroup>
-                  <Input placeholder='Enter Email' />
-                </InputGroup>
-              </Flex>
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  Gender
-                </Text>
-                <Menu isLazy>
-                  <MenuButton
-                    as={Button}
-                    variant={'unstyled'}
-                    bg={'buttonClr.100'}
-                    rightIcon={<ChevronDownIcon />}
-                  >
-                    {selectedOption}
-                  </MenuButton>
-                  <MenuList bg={'black'}>
-                    {options.map((option) => (
-                      <MenuItem
-                        bg={'black'}
-                        color={'white'}
-                        key={option}
-                        onClick={() => setSelectedOption(option)}
-                      >
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </MenuList>
-                </Menu>
-              </Flex>
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  Age
-                </Text>
-                <NumberInput min={10} max={100}>
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </Flex>
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  OTP
-                </Text>
-                <HStack>
-                  <PinInput>
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                  </PinInput>
-                </HStack>
-              </Flex>
-              <Flex flexDir={'column'} mb={3}>
-                <Text fontWeight={600} fontSize={15}>
-                  Password
-                </Text>
-                <PasswordInput />
-              </Flex>
+              <FormControl>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    Name
+                  </FormLabel>
+                  <InputGroup>
+                    <Input
+                      value={formData.name}
+                      onChange={handleNameChange}
+                      placeholder='Enter Name'
+                    />
+                  </InputGroup>
+                </Flex>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    Email
+                  </FormLabel>
+                  <InputGroup>
+                    <Input
+                      value={formData.email}
+                      onChange={handleEmailChange}
+                      placeholder='Enter Email'
+                    />
+                  </InputGroup>
+                </Flex>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    Gender
+                  </FormLabel>
+                  <Menu isLazy>
+                    <MenuButton
+                      as={Button}
+                      variant={'unstyled'}
+                      bg={'buttonClr.100'}
+                      rightIcon={<ChevronDownIcon />}
+                    >
+                      {selectedOption}
+                    </MenuButton>
+                    <MenuList bg={'black'}>
+                      {options.map((option) => (
+                        <MenuItem
+                          bg={'black'}
+                          color={'white'}
+                          key={option}
+                          onClick={() => setSelectedOption(option)}
+                        >
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </Menu>
+                </Flex>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    Age
+                  </FormLabel>
+                  <NumberInput min={10} max={100} value={formData.age} onChange={handleAgeChange}>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </Flex>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    OTP
+                  </FormLabel>
+                  <HStack>
+                    <PinInput>
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                      <PinInputField />
+                    </PinInput>
+                  </HStack>
+                </Flex>
+                <Flex flexDir={'column'} mb={3}>
+                  <FormLabel fontWeight={600} fontSize={15}>
+                    Password
+                  </FormLabel>
+                  <PasswordInput formData={formData} setFormData={setFormData} />
+                </Flex>
+              </FormControl>
             </ModalBody>
           </Box>
           <ModalFooter>
@@ -188,7 +253,7 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
               border={'1px solid white'}
               cursor={!validCommunity ? 'not-allowed' : 'cursor'}
               isDisabled={!validCommunity}
-              onClick={handleClose}
+              onClick={handleSignUp}
             >
               Sign Up
             </Button>
