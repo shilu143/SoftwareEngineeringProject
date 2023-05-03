@@ -167,7 +167,7 @@ app.get("/fetchUserCommunity",verifyToken,async (req,res)=>{
 	const userId = userIdData.rows[0].id;
 
 	client.query(
-		'select comName from communityUser as c,communities as com where c.userId=$1 and c.comId=com.comId',[userId],(error,results)=>{
+		'select comName,c.comId from communityUser as c,communities as com where c.userId=$1 and c.comId=com.comId',[userId],(error,results)=>{
 			if (error) {
 				console.error(error);
 				res.status(500).send("Error fetching commuity for users");
@@ -177,12 +177,12 @@ app.get("/fetchUserCommunity",verifyToken,async (req,res)=>{
 		});
 });
 
-/*fetch posts of a commuity*/
+/*send post ids of a commuity to front end*/
 app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
 	/*work to be done here*/
-	const comId = req.userEmail;
+	const comId = req.body.comId;
 	console.log(comId);
-	client.query('select * from posts where comId=$1',[comId],(error,results)=>{
+	client.query('select postid from posts where comId=$1 LIMIT 5',[comId],(error,results)=>{
 		if (error) {
 			console.error(error);
 			res.status(500).send("Error fetching posts of a community");
@@ -191,6 +191,20 @@ app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
 		  }
 	});
 });
+
+/*create post by a user in a community*/
+app.post("/insertPostForACommunity",upload.single('profile'),async (req,res)=>{
+	// const creatorEmail=req.userEmail;
+	if(req.file==undefined){
+		console.log("yo vro!");
+	}
+	console.log(req.file);
+	const title = req.body.title,comId=req.body.comId,profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;	
+	console.log(title,comId,profile_img_url);
+	res.status(200).send("YO");
+});
+
+
 
 /*api to check whether a community exists*/
 app.get("/checkSameNameCommunity",verifyToken,(req,res)=>{
