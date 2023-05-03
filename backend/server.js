@@ -9,13 +9,13 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const https = require("https");
 
-const imageUrl =
-	"https://upcdn.io/W142hJk/image/demo/4mUeqoGb1t.webp?w=600&h=600&fit=max&q=70";
-const fpt = "./image.png";
+// const imageUrl =
+// 	"https://upcdn.io/W142hJk/image/demo/4mUeqoGb1t.webp?w=600&h=600&fit=max&q=70";
+// const fpt = "./image.png";
 
-https.get(imageUrl, (response) => {
-	response.pipe(fs.createWriteStream(fpt));
-});
+// https.get(imageUrl, (response) => {
+// 	response.pipe(fs.createWriteStream(fpt));
+// });
 
 const jwtkey = "college_reddit"; /*key for jwt*/
 
@@ -29,9 +29,10 @@ function verifyToken(req, res, next) {
 	// const decoded = jwt.decode(token,{complete:true});
 	// const userEmailId = decoded.payload.userId;
 	// console.log("Email sent="+userEmailId);
+	// console.log("token="+token_from_frontend);
 	if (token_from_frontend) {
 		const token = token_from_frontend.split(" ")[1];
-		console.log(token);
+		// console.log("token 1="+token);
 		jwt.verify(token, jwtkey, (error, valid) => {
 			if (error) {
 				res.send("Please send correct token");
@@ -181,15 +182,48 @@ app.post("/userSignUp", upload.single("profile"), async (req, res) => {
 	);
 });
 
+/*post click action api,it will send the data of the complete post,including comment count*/
+app.get("/returnDetailsOfAPost",verifyToken,async (req,res)=>{
+	const postId = req.query.postId;
+	let commentCount = 0;
+	console.log(postId);
+	commentCount = await client.query("select count(*) from comments where postId=$1",[postId]);
+	let commentRows = await client.query("select * from comments where postid=$1",[postId]);
+	const communityId = await client.query("select * from posts where postId=$1",[postId]);
+	// console.log(communityId);
+	const result = communityId.rows.map(row=>({
+		...row,
+		commentCount : commentCount.rows[0].count,
+		commentRows : commentRows.rows
+	}));
+	// console.log(result);
+	res.status(200).send(result);
+});
+
+/*insert comments, called when a comment is added*/
+app.post("/insertCommentByUserAtAPost",verifyToken,async (req,res)=>{
+	console.log(req.body);
+	let createdByWhom=req.userEmail,parentComment=req.body.parentComment,text=req.body.text,postId=req.body.postId;
+	let userId=await client.query("select * from users where email=$1",[createdByWhom]);
+	userId = userId.rows[0].id;
+	await client.query("insert into comments(createdByWhom,parentComment,writtenText,timeCreated,votes,postId) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",[userId,parentComment,text,postId],(error,results)=>{
+		if(error){
+			console.log(error);
+			res.status(500).send("Error adding comment");
+		}
+		else{
+			res.status(200).send("Comment added successfully");
+		}
+	});
+});
 
 
 
 /*send post ids of a commuity to front end*/
 app.get("/fetchPostsOfCommunity",verifyToken,(req,res)=>{
-
 	/*work to be done here*/
-	const comId = req.body.comId;
-	console.log(comId);
+	const comId = req.query.comId;
+	console.log("Community id="+comId);
 	client.query(
 		"select * from posts where comId=$1",
 		[comId],
@@ -225,15 +259,30 @@ app.get("/fetchCommunities", verifyToken, (req, res) => {
 });
 
 /*create post by a user in a community*/
-app.post("/insertPostForACommunity",upload.single('profile'),async (req,res)=>{
-	// const creatorEmail=req.userEmail;
+app.post("/insertPostForACommunity",verifyToken,upload.single('profile'),async (req,res)=>{
+	const creatorEmail=req.userEmail;
+	const title = req.body.title;
+	const comId = req.body.comId;
+	let profile_img_url = "" ;
+	console.log(title,comId);
+	let creatorId = await client.query("select * from users where email=$1",[creatorEmail]);
+	creatorId = creatorId.rows[0].id;
 	if(req.file==undefined){
 		console.log("yo vro!");
+		profile_img_url = "";
 	}
-	console.log(req.file);
-	const title = req.body.title,comId=req.body.comId,profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;	
-	console.log(title,comId,profile_img_url);
-	res.status(200).send("YO");
+	else{
+		profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;
+	}
+	client.query("insert into posts(comId,postTitle,createdByWhom,timeCreated,votes,postImage) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",[comId,title,creatorId,profile_img_url],(error,results)=>{
+		if(error){
+			console.log(error)
+			res.status(500).send("Error inserting posts");
+		}
+		else{
+			res.status(200).send("Posts inserted successfully");
+		}
+	});	
 });
 
 
@@ -261,6 +310,8 @@ app.get("/checkSameNameCommunity", verifyToken, (req, res) => {
 		}
 	);
 });
+
+/**/
 
 /*api to insert into a community into the database*/
 app.post(

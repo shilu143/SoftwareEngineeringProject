@@ -8,8 +8,8 @@ const RightContent = () => {
   return (
     <Flex justify={'center'} align={'center'}>
       <Directory />
-      <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-      {/* <AuthButtons /> */}
+      {/* <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' /> */}
+      <AuthButtons />
     </Flex>
   )
 }

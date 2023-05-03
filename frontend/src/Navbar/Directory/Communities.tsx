@@ -40,7 +40,7 @@ const Communities: React.FC = () => {
           MODERATING
         </Text>
         {Array.isArray(communities) && communities.length > 0 ? (
-          <div style={{ height: '250px', overflow: 'auto' }}>
+          <div>
             {communities.map((com) => (
               <MenuListItems
                 key={com.comid}
@@ -54,7 +54,7 @@ const Communities: React.FC = () => {
           <p>No communities found.</p>
         )}
       </Box>
-      <Box mt={3} mb={4} css={{ overflowY: 'auto', maxHeight: '150px' }}>
+      <Box mt={3} mb={4}>
         <Text pl={3} mb={1} fontSize={'7pt'} fontWeight={500} color={'gray.500'}>
           MY COMMUNITIES
         </Text>
