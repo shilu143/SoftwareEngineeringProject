@@ -1,7 +1,8 @@
 // import './PostPage.css'
 import { useState } from 'react'
 import { Tabs, Tab, Box } from '@material-ui/core'
-import Posts from './Components/Posts'
+import UserPosts from './Components/UserPosts'
+import UserComments from './Components/UserComments'
 
 function MainDisplay() {
   const [currentTab, setCurrentTab] = useState(0)
@@ -16,12 +17,12 @@ function MainDisplay() {
         display: 'flex-inline',
         backgroundColor: 'black',
         width: '70%',
-        height: '110vh',
+        height: '100vh',
         marginBottom: '0px',
         marginLeft: 'auto',
         marginRight: '3vh',
         borderRadius: '10px',
-
+        // overflowY: 'scroll',
         paddingBottom: '0px',
         // alignItems: 'center',
         color: 'white',
@@ -40,17 +41,18 @@ function MainDisplay() {
           value={currentTab}
           onChange={handleTabChange}
           aria-label='simple tabs example'
-          style={{ display: 'flex', width: 'auto' }}
+          style={{ display: 'flex', width: 'auto', position: 'sticky' }}
           centered
         >
           <Tab label='Posts' style={{ display: 'flex', width: '30vh' }} />
           <Tab label='Comments' style={{ display: 'flex', width: '30vh' }} />
           <Tab label='Likes' style={{ display: 'flex', width: '30vh' }} />
         </Tabs>
-
-        {currentTab === 0 && <Posts />}
-        {currentTab === 1 && <Box>Page 2 Content</Box>}
-        {currentTab === 2 && <Box>Page 3 Content</Box>}
+        <div style={{ display: 'flex-inline', height: '93vh', overflowY: 'auto' }}>
+          {currentTab === 0 && <UserPosts />}
+          {currentTab === 1 && <UserComments />}
+          {currentTab === 2 && <Box>Page 3 Content</Box>}
+        </div>
       </Box>
     </div>
   )
