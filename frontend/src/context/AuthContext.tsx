@@ -1,14 +1,16 @@
 import Cookies from 'js-cookie'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 interface User {
   email: string
   token: string
+  profileImage: string
 }
+
 interface AuthContextProps {
   user: User | null
   setUser: React.Dispatch<React.SetStateAction<User | null>>
-  profileImage: string
+  setData: () => void
 }
 
 interface AuthProviderProp {
@@ -20,17 +22,40 @@ export const AuthContext = createContext<AuthContextProps>({
   setUser: () => {
     console.log('hehe')
   },
-  profileImage: '',
+  setData: () => {
+    console.log('hehe')
+  },
 })
 
 export const useAuth = () => useContext(AuthContext)
 
 const AuthProvider: React.FC<AuthProviderProp> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
-  const [profileImage, setProfileImage] = useState('')
-  return (
-    <AuthContext.Provider value={{ user, setUser, profileImage }}>{children}</AuthContext.Provider>
-  )
+
+  useEffect(() => {
+    const email = Cookies.get('email')
+    const authToken = Cookies.get('authToken')
+    const profileImage = Cookies.get('profileImage')
+    if (authToken && email) {
+      setUser({
+        email,
+        token: authToken,
+        profileImage: profileImage ? profileImage : '',
+      })
+
+    }
+  }, [])
+
+  const setData = () => {
+    if (user?.token !== undefined) {
+      console.log(user.profileImage)
+      Cookies.set('email', user?.email)
+      Cookies.set('authToken', user?.token)
+      Cookies.set('profileImage', user?.profileImage)
+    }
+  }
+
+  return <AuthContext.Provider value={{ user, setUser, setData }}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider
