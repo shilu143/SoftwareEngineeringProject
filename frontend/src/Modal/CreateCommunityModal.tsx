@@ -26,6 +26,7 @@ import React, { useContext, useState } from 'react'
 import { BsPatchCheckFill, BsPatchExclamationFill } from 'react-icons/bs'
 import { AvatarWithFileManager } from '../components/FileUploader'
 import Cookies from 'js-cookie'
+import { AuthContext } from '../context/AuthContext'
 // import { AuthContext, useAuth } from '../hooks/useAuth'
 
 interface Props {
@@ -42,8 +43,7 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
   const [tags, setTags] = useState<string[]>([])
   const [tagInput, setTagInput] = useState('')
   const [tagError, setTagError] = useState(false)
-  // const userToken = useContext(AuthContext)
-  const userToken = Cookies.get('AuthToken')
+  const { user } = useContext(AuthContext)
   const toast = useToast()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
       setCommunityName(event.target.value)
       setCharsRemaining(25 - event.target.value.length)
       const params = { comName: event.target.value }
-      const headers = { Authorization: `Bearer ${userToken}` } // Add the token to the headers
+      const headers = { Authorization: `Bearer ${user?.token}` } // Add the token to the headers
       if (event.target.value.length !== 0) {
         const response = await axios.get('/checkSameNameCommunity', { params, headers })
         setValidCommunity(response.data.exists)
@@ -90,7 +90,7 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
     for (let i = 0; i < tags.length; i++) {
       formData.append('category', tags[i])
     }
-    const headers = { Authorization: `Bearer ${userToken}` }
+    const headers = { Authorization: `Bearer ${user?.token}` }
     axios
       .post('/insertCommunityInDatabase', formData, { headers })
       .then((response) => {

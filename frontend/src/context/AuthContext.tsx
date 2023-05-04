@@ -42,9 +42,7 @@ const AuthProvider: React.FC<AuthProviderProp> = ({ children }) => {
         token: authToken,
         profileImage: profileImage ? profileImage : '',
       })
-      // Cookies.set('email', email)
-      // Cookies.set('authToken', authToken)
-      // Cookies.set('profileImage', profileImage ? profileImage : '')
+
     }
   }, [])
 

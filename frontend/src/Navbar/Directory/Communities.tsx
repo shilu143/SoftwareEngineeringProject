@@ -23,21 +23,14 @@ const Communities: React.FC = () => {
   const [open, setOpen] = useState(false)
   const [communities, setCommunities] = useState<Community[]>([])
   const { user, setUser } = useContext(AuthContext)
-  // const [userToken]
-  // const userToken = useContext(AuthContext)
   const [userToken, setUserToken] = useState<string | null>(null)
 
   useEffect(() => {
-    const token = Cookies.get('authToken')
-    setUserToken(token ? token : '')
+    handleChange()
   }, [user])
 
-  useEffect(() => {
-    handleChange()
-  }, [userToken])
-
   const handleChange = async () => {
-    const headers = { Authorization: `Bearer ${userToken}` }
+    const headers = { Authorization: `Bearer ${user?.token}` }
     const response = await axios.get('/fetchCommunities', { headers })
     setCommunities(response.data)
   }
