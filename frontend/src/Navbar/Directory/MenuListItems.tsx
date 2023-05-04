@@ -8,6 +8,7 @@ type MenuListItemsProps = {
   //   icon: IconType
   iconColor: string
   imageURL?: string
+
   onClick?: () => void;
 }
 
@@ -17,7 +18,9 @@ const MenuListItems: React.FC<MenuListItemsProps> = ({
   //   icon,
   iconColor,
   imageURL,
+
   onClick
+
 }) => {
   return (
     <MenuItem
@@ -26,7 +29,9 @@ const MenuListItems: React.FC<MenuListItemsProps> = ({
       bg='black'
       borderRadius={'5px'}
       _hover={{ bg: 'back.100' }}
+
       onClick={onClick}
+
     >
       <Flex align='center'>
         {imageURL ? (

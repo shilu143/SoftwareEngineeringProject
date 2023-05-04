@@ -1,8 +1,16 @@
-import { Box, Flex, Spacer } from '@chakra-ui/react'
+import { Box, Flex ,Spacer} from '@chakra-ui/react'
 import RightContent from './RightContent/RightContent'
+// import { Search } from '../components/Search'
+import Search from '../components/Search'
 import SearchInput from './SearchInput'
 
 const Navbar = () => {
+  const data = [
+    { id: 1, name: 'John Doe', email: 'johndoe@example.com' },
+    { id: 2, name: 'Jane Doe', email: 'janedoe@example.com' },
+    { id: 3, name: 'Bob Smith', email: 'bobsmith@example.com' },
+  ]
+
   return (
     <Flex
       align='center'
@@ -22,7 +30,10 @@ const Navbar = () => {
       {/* <Spacer />
       <Spacer /> */}
       {/* <Flex width={'100vw'} position={'fixed'} justify={'center'}> */}
-      <SearchInput />
+
+      {/* <SearchInput /> */}
+      <Search />
+
       {/* <Spacer /> */}
       <RightContent />
       {/* </Flex> */}

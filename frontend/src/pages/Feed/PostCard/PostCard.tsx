@@ -1,3 +1,4 @@
+
 import { Container, Avatar, Image, Button, Flex, Text, IconButton, Box, Icon } from '@chakra-ui/react'
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
@@ -6,11 +7,13 @@ import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { AuthContext } from '../../../context/AuthContext'
 
 
+
 interface Props {
     postid: string;
 }
 
 function PostCard({ postid }: Props) {
+
     const user = useContext(AuthContext).user;
 
     const [imageSrc, setImageSrc] = useState('')
@@ -19,6 +22,7 @@ function PostCard({ postid }: Props) {
     const [isUpvoted, setIsUpvoted] = useState(false)
     const [isDownvoted, setIsDownvoted] = useState(false)
     const [comments, setComments] = useState(0)
+
     const [community, setCommunity] = useState('')
     const [communityname, setCommunityname] = useState('')
     const [postedby, setPostedby] = useState('')
@@ -45,7 +49,6 @@ function PostCard({ postid }: Props) {
         caller()
       }, [postid, user?.token]);
     
-
 
     const handleUpvoteClick = () => {
         if (isUpvoted) {
@@ -90,6 +93,7 @@ function PostCard({ postid }: Props) {
 
     return (
         <Flex justify={'center'} align={'center'} px={'10em'} bg={'white'} m={{ base: '1%', md: '3%', lg: '5%' }}>
+
           <Box width={'100%'}>
             <Flex align="left" _hover={{ cursor: 'pointer' }}>
               <Avatar size="sm" name="community image" src={comImageSrc} onClick={handleCommunityClick} />

@@ -17,10 +17,10 @@ import {
 import PostCards from './PostCard/PostCards';
 
 
+
 const Feed = () => {
   const [posts, setPosts] = useState([{}])
   const [comid, setComid] = useState('1')
-
   return (
     <Box display="flex" overflow="hidden" height="100vh">
       <Box flex="0 0 auto" width="15%" backgroundColor="white" position="fixed" top={0} bottom={0} left={0}>
@@ -43,6 +43,7 @@ const Feed = () => {
               </Button>
             </Link>
             <VStack spacing={6} m={10}>
+
               <PostCards comid = {comid}/>
             </VStack>
           </Box>
