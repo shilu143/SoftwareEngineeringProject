@@ -23,6 +23,7 @@ The login module works by verifying the user's credentials against a database or
 
 ### • Implementation
 |     |     |
+| --- | --- |
 Input | Email and password
 Output | Valid user - guided to application homepage / Invalid credentials - error
 
