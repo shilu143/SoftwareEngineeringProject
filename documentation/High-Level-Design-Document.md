@@ -6,22 +6,20 @@
 - [General Description](#2general-description)
     - [Product Perspective](#21-product-perspective)
     - [Tools Used](#22-tools-used)
-    - [General Constraints](#23-general-constraints)
-    - [Assumptions](#24-assumptions)
-    - [Special Design Aspects](#25-special-design-aspects)
+    - [Assumptions](#23-assumptions)
+    - [Special Design Aspects](#24-special-design-aspects)
 
 - [Design Details](#3-design-details)
     - [Main Design Features](#31-main-design-features)
     - [Application Architecture](#32-application-architecture)
     - [Technology Architecture](#33-technology-architecture)
-    - [Deployment Architecture](#34-deployment-architecture)
-    - [Standards](#35-standards)
-    - [Database Design](#36-database-design)
-    - [Interface](#37-interface)
-    - [Use case](#38-use-case-diagrams-for-users-and-admin)
-    - [Major Classes](#39-major-classes)
-    - [Major Modules](#310-major-modules)
-    - [Non Functional Attributes](#311-non-functional-attributes)
+    - [Standards](#34-standards)
+    - [Database Design](#35-database-design)
+    - [Interface](#36-interface)
+    - [Use case](#37-use-case-diagrams-for-users-and-admin)
+    - [Major Classes](#38-major-classes)
+    - [Major Modules](#39-major-modules)
+    - [Non Functional Attributes](#310-non-functional-attributes)
 
 # 1. Introduction
 The purpose of this High Level Design document is to provide a conceptual understanding of the system and its key components, without getting into detailed implementation or technical specifications.
@@ -61,19 +59,14 @@ Overall, the product's perspective is focused on providing a platform for users 
 ## 2.2 Tools Used
 - ReactJS: A popular open-source JavaScript library used for building user interfaces for web applications.
 - NodeJS Server: An open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
-- More
-- More
-- More
-- More
-- More
+- PostgreSQL: PostgreSQL uses a client-server architecture, where the server process manages the database and multiple clients can connect to it to execute queries and transactions. 
+- Jest: Jest is a popular JavaScript testing framework that allows developers to write tests for their code to ensure it works as intended.
+- Chakra UI: Chakra UI is a popular open-source React component library that provides a set of customizable and accessible UI components that can be used to build modern web applications.
 
-## 2.3 General Constraints
-    To Be Written
-
-## 2.4 Assumptions 
+## 2.3 Assumptions 
 Refer [SRS section](./SRS-Document.md#7-implementation-details)
 
-## 2.5 Special Design Aspects
+## 2.4 Special Design Aspects
 This application requires internet access for its overall functionality so as to make HTTPS requests to database server and perform methods. 
 
 ***
@@ -85,7 +78,7 @@ The main design features include five major parts: application architecture, tec
 
 ## 3.2 Application Architecture
 The architecture depicts the overall high level design view of the project.
-<img src="">
+<img src="images/applicationArchitecture.png">
 
 ## 3.3 Technology Architecture
 The architecture depicts the presentation layer, application layer, data layer and cloud layer.
@@ -97,44 +90,32 @@ The architecture depicts the presentation layer, application layer, data layer a
 **Data Layer** - The data is stored in this layer. Application layer communicates with Database layer to retrieve the data. It contains methods that connects the database and performs required action e.g.: insert, update, delete etc. In simple words, it is to share and retrieve the data.
 
 **Cloud Layer** - It refers to the infrastructure and services that enable cloud computing, including hardware, software, networking, and storage resources that are accessed via the internet.
-     
-<img src="">
 
-## 3.4 Deployment Architecture
-A design to depict the deployment process of the entire application.
-
-<img src="">
-
-## 3.5 Standards
+## 3.4 Standards
 - Database – PostgreSQL
 - Inputs – Entered through text input layout
 - Security – username and password are required for access to the system
 - Quality – by keeping the interface simple and direct, quality should be kept at a maximum
 
-## 3.6 Database Design
+## 3.5 Database Design
 The diagram depicts entities and the operations to be done on those entities. A good design will minimize redundancy and attempt to store all the information in as small a space as possible.
 
 <img src="images/databaseDesign.jpeg" >
 
-## 3.7 Interface
+## 3.6 Interface
 Refer [SRS section](./SRS-Document.md#interface-requirements)
 
-## 3.8 Use-Case Diagrams for Users and Admin
-The design depicts UML use-case diagrams for both Users and Admin. The diagram has actors and processes assigned to them. We have done separately for both users and admin as one will have app based activity and other web based activity.
+## 3.7 Use-Case Diagrams for Users and Admin
+The design depicts UML use-case diagram for the user. The diagram has actors and processes assigned to them. 
 
-User use-case Diagram         |  Admin use case diagram
-:-------------------------:|:-------------------------:
-<img src="" width="500" height="500">  |  <img src="" width="500" height="500">
+<img src="images/useCase.png">
 
 
-## 3.9 Major Classes  
-The design depicts high level design of Classes with their names and their associations. The classes along with their attributes and methods have been explained in the low level design document. Again separate class diagram for users and admins as they both have different servers.
+## 3.8 Major Classes  
+The design depicts high level design of Classes with their names and their associations. The classes along with their attributes and methods have been explained in the low level design document. 
 
-User Class Diagram        |  Admin Class Diagram
-:-------------------------:|:-------------------------:
-<img src="" >  |  <img src="" >
 
-## 3.10 Major Modules
+## 3.9 Major Modules
 All the modules have been depicted in the Application Layer of the Technology Architecture. They are:-
 - Authentication Module
 - Database Management Module
@@ -144,7 +125,7 @@ All the modules have been depicted in the Application Layer of the Technology Ar
 
 We have explained all of them separately inside our Low Level Design Document
 
-## 3.11 Non Functional Attributes
+## 3.10 Non Functional Attributes
 **Reliability**: The system will not crash if different users want to post or comment at same time. 
  
 **Availability**: The system will run indefinitely. A user can book rooms anytime. However the availability hours of a particular room is controlled by the admin. For new users , requests for access to the app will only be approved during the working hours time.
