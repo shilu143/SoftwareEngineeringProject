@@ -44,7 +44,7 @@ const LoginModal: React.FC<Props> = ({ open, handleClose }) => {
     email: '',
     profile: null,
   })
-  const { user, setUser } = useContext(AuthContext)
+  const { user, setUser, setData } = useContext(AuthContext)
   const [communityName, setCommunityName] = useState('')
   const [validCommunity, setValidCommunity] = useState(false)
   // const userToken = useContext(AuthContext)
@@ -75,9 +75,16 @@ const LoginModal: React.FC<Props> = ({ open, handleClose }) => {
         duration: 5000,
         isClosable: true,
       })
-      Cookies.set('authToken', response.data.auth)
+
+      setUser({
+        email: response.data.userEmail,
+        token: response.data.auth,
+        profileImage: response.data.profileImage,
+      })
       Cookies.set('email', response.data.userEmail)
-      setUser({ email: response.data.userEmail, token: response.data.auth })
+      Cookies.set('authToken', response.data.auth)
+      Cookies.set('profileImage', response.data.profileImage)
+
       // login(response.data.Email, response.data.auth)
       resetState()
       handleClose()
