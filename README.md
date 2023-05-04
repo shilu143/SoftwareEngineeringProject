@@ -2,7 +2,7 @@
 
 # A-Reddit-Like-Platform
 
-This is a social aggregation, discussion, and community-driven platform which provides an easy and effective way for the users to share content, such as links, images, and text posts, and participate in discussions by commenting and upvoting or downvoting content. 
+The project is a social aggregation, discussion, and community-driven platform which provides an easy and effective way for the users to share content, such as links, images, and text posts, and participate in discussions by commenting and upvoting or downvoting content. 
 
 *** 
 
@@ -12,11 +12,11 @@ This is a social aggregation, discussion, and community-driven platform which pr
 - Voting system: It has a voting system that allows users to upvote or downvote content based on their opinion of it. 
 - Comments: Users can comment on posts and engage in discussions with other users. 
 - Search function: Users can search for specific content, subreddits, or users using the search function.
-- User profiles: Users can create profiles and customize them with a profile picture. They can also view their activity on the site, including their posts, comments, and upvotes.
+- User profiles: Users can create profiles and customize them with a profile picture.
 
 *** 
 
-## 1. Advantages
+## 2. Advantages
 
 - User-generated content: The platform is driven by user-generated content, which means that the content on the platform is often more diverse and interesting than what is found on traditional news or social media websites.
 - Education and learning: It can a great resource for education and learning, with many communities dedicated to sharing information and knowledge on a wide range of topics, 
@@ -29,7 +29,7 @@ This is a social aggregation, discussion, and community-driven platform which pr
 
 ### 3.1 How to use the platform
 - Website has been deployed [here]().
-- Smoothly Supported with Mozilla Firefox and Google Chrome
+- Well supported with Mozilla Firefox and Google Chrome.
 
 ### 3.2 How to run locally
 
@@ -61,10 +61,11 @@ This is a social aggregation, discussion, and community-driven platform which pr
 ***
 
 ### Contributors
-* [Ashish Alok](https://github.com/AshishAlok) 2020CSB1076
-* [Shilu Tudu](https://github.com/shilu143) 2020CSB1126
-* [Shaurya PS Bisht](https://github.com/Shaurya-Ps-Bisht) 2020CSB1125
-* [Nishant Sharma]() 2020CSB1102
-* [Sudhanshu Kumar](https://github.com/prateek697) 2019CSB1123
+* [Ashish Alok](https://github.com/AshishAlok) - 2020CSB1076
+* [Nishant Sharma]() - 2020CSB1102
+* [Shaurya PS Bisht](https://github.com/Shaurya-Ps-Bisht) - 2020CSB1125
+* [Shilu Tudu](https://github.com/shilu143) - 2020CSB1126
+* [Sudhanshu Kumar](https://github.com/prateek697) - 2019CSB1123
+
 
 ***
