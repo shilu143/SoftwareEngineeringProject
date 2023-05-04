@@ -28,7 +28,7 @@ This is a social aggregation, discussion, and community-driven platform which pr
 ## 3. User Guide 
 
 ### 3.1 How to use the platform
-- Website has been deployed [here]().
+- Website can be used locally.
 - Well supported with Mozilla Firefox and Google Chrome.
 
 ### 3.2 How to run locally
