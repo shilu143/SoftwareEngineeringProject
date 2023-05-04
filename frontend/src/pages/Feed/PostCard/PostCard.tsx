@@ -38,6 +38,7 @@ function PostCard({ postid }: Props) {
             setVotes((prevVotes) => prevVotes + 1)
             setIsUpvoted(true)
             if (isDownvoted) {
+                setVotes((prevVotes) => prevVotes + 1)
                 setIsDownvoted(false)
             }
         }
@@ -51,10 +52,12 @@ function PostCard({ postid }: Props) {
             setVotes((prevVotes) => prevVotes - 1)
             setIsDownvoted(true)
             if (isUpvoted) {
+                setVotes((prevVotes) => prevVotes - 1)
                 setIsUpvoted(false)
             }
         }
     }
+
 
     const handleCommentClick = () => {
         console.log('comment clicked')
@@ -72,6 +75,11 @@ function PostCard({ postid }: Props) {
         <Flex justify={'center'} align={'center'} px={'10em'} bg={'white'} m={{ base: '1%', md: '3%', lg: '5%' }}>
             <Box width={'100%'}>
                 <Flex align="left" _hover={{ cursor: 'pointer' }}>
+                    <Box w={10} mr={4}>
+                        <Flex align="center" justify="center" bg="gray.100" h={10} rounded="md">
+                            <Text fontWeight="bold" fontSize="lg">1</Text>
+                        </Flex>
+                    </Box>
                     <Avatar size="sm" name="community image" src={comImageSrc} onClick={handleCommunityClick} />
                     <Text ml={2} onClick={handleCommunityClick} >cc/{community}</Text>
                     <Text ml={2} fontSize="sm" color="gray.500" onClick={handlePostedByClick} >posted by {postedby} {postTime} ago</Text>
@@ -80,8 +88,8 @@ function PostCard({ postid }: Props) {
                 <Image src={imageSrc} alt="Post image" />
                 <Flex align="center" justify="space-between" mt={2}>
                     <Flex align={'center'}>
-                    <Icon as={BiUpvote} color={isUpvoted ? 'blue.500' : 'gray.500'} onClick={handleUpvoteClick }
-                            _hover={{ cursor: 'pointer' }} />   
+                        <Icon as={BiUpvote} color={isUpvoted ? 'blue.500' : 'gray.500'} onClick={handleUpvoteClick}
+                            _hover={{ cursor: 'pointer' }} />
                         <Icon as={BiDownvote} color={isDownvoted ? 'blue.500' : 'gray.500'} onClick={handleDownvoteClick}
                             _hover={{ cursor: 'pointer' }} />
                         <Text fontSize="md" ml={2} mr={4}>{votes} points</Text>
@@ -93,6 +101,7 @@ function PostCard({ postid }: Props) {
                 </Flex>
             </Box>
         </Flex>
+
     );
 
 }
