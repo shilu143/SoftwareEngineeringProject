@@ -1,8 +1,7 @@
 ## Table Of Contents
 * [Introduction](#1-introduction)
-* [Classes](#2-classes)
-* [Modules](#3-modules)
-* [Database Design](#4-database-design)
+* [Modules](#2-modules)
+* [Database Design](#3-database-design)
 
 # 1. Introduction
 
@@ -12,53 +11,28 @@ The LLD document is typically created after the HLD document, and it serves as a
 
 ***
 
-# 2. Classes (not edited this section)
-Below are the detailed description of the major classes of our application discussed in high level design document.
-- **App** - The main class for our application. All the search methods will be given to the app class.
-- **User** - The class will contain objects of users who will be accessing the application for booking and other facilities. All the attributes and methods have been shown in the detailed diagram.
-- **Student** - This class inherits from the User class and will be able to perform all the functionalities defined for user class. 
-Professor - This class also inherits from the User Class. This class will have an additional method of viewing Attendance Information so that attendance record can be maintained.
-- **Classrooms** - This class will have objects of every classroom which are available for booking and will have extra attributes like capacity so that strength of the classrooms can be determined. Other methods and attributes can be seen in the class diagram.
-- **Labs**- This class will have objects of every lab along with the equipment which are available for booking. Other methods and attributes can be seen in the class diagram.
-
-- **Sports Complex** - This class will have objects of every sports complex which are available for booking. Other methods and attributes can be seen in the class diagram.
-- **Booking Slots** - This class contains objects of booking slots available for booking for each classroom,labs and sports complex. Date and time are the main attributes here.
-- **Booked** - This class contains objects of booked facilities. Each object will have attributes like who booked them and what is the slot. A class where objects contain the history of all bookings made.
-- **Attendance**- This class contains objects of all the attendance history of a particular booking session which will be used to manage the attendance.
-
-**Below is the detailed Class Diagram for our application**
-
-<img src=""></img> 
-
-***
-
-# 3. Modules
+# 2. Modules
 Below are the detailed description of the modules of our application discussed in application layer of technology architecture in high level design document.
 - **Authentication Module** - This module contains all the user Authentication related methods like signing up and logging in. The Authentication module works via JWT Tokens. This module will authenticate all the users using the database.. The module will also handle options like editing one’s profile.
-
-<img src=""></img>
 
 
 - **Database Management Module** - This module will be managed solely by the admin where he will manage database related tasks like adding/deleting/updating a user to the database. Also, the admin can monitor all the activity going on.
 
-<img src=""></img>
+<img src="images/database.jpeg"></img>
 
 - **Community Module** - The major module of our application. All the community related activities will be handled by this module. The major things handled will be the credibility to post in the community and to comment under a post. All the posts and comments will be maintained in the database.
 
-
 - **Search Module** - This Module will handle searching among the posts, users and communities according to title of the post, username, community name, tags, and other factors. The module will retrieve information from the database for each query.
 
-<img src=""></img>
+<img src="images/interface3.jpeg"></img>
 
 - **Posts Module** - This Module will be used for the new and existing posts, and the comments on those posts.
-
-<img src=""></img>
 
 
 ***
 
 
-# 4. Database Design (not edited this section)
+# 3. Database Design
 A database includes bulk information deposited in a framework, making it easier to locate and explore relevant information. A well-designed database contains accurate and up-to-date information, allowing data to be fetched easily whenever needed.
 We have implemented a database with minimum redundancy which reduces the probability of faults and discrepancies within the database.
 It explains the database ER mentioned in high level design document [here](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/High-Level-Design-Document#database-design).
