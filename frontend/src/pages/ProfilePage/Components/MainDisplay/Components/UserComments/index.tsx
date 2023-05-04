@@ -6,7 +6,20 @@ import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
 import UserCommentCard from './Components/UserCommentCard'
 
-function UserComments() {
+interface Comment {
+  commentid: number
+  createdbywhom: number
+  parentcomment: number
+  writtentext: string
+  timecreated: Date
+  votes: number
+  postid: number
+}
+interface UserCommentsProps{
+  comments: Comment[]
+}
+
+function UserComments({ comments }: UserCommentsProps) {
   const commentList = [
     {
       commentID: 1,
@@ -114,8 +127,8 @@ function UserComments() {
 
   return (
     <div>
-      {commentList.map((comment) => (
-        <UserCommentCard key={comment.commentID} commentActual={comment} />
+      {comments.map((comment) => (
+        <UserCommentCard key={comment.commentid} commentActual={comment} />
       ))}
     </div>
   )

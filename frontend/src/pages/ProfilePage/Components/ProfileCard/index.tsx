@@ -6,10 +6,36 @@ import { Box, Flex, Icon, Heading, Text, Button, Center, Image, IconButton } fro
 import { FaComment, FaShare } from 'react-icons/fa'
 import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
+import axios from 'axios'
 
 function ProfileCard() {
+  interface UserDetails {
+    id: number
+    email: string
+    name: string
+    gender: string
+    age: number
+    password: string
+    profileimage: string
+  }
   const divRef = useRef(null)
   const [isHovered, setIsHovered] = useState(false)
+
+  const [actualUserDetails, setActualUserDetails] = useState<UserDetails>()
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/fetchDetailsOfAUser?userId=1')
+      .then((response) => {
+        setActualUserDetails(response.data)
+        // console.log(response.data[0])
+        // console.log
+        // setCommentRows(response.data[0].commentRows)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <Box
@@ -30,7 +56,7 @@ function ProfileCard() {
       <div>
         <Box w='10rem' h='10rem' borderRadius='50%' overflow='hidden' position='relative'>
           <Image
-            src='/assets/images/fububi.png'
+            src={actualUserDetails?.profileimage}
             alt='Example image'
             borderRadius='full'
             boxSize='10rem'
@@ -61,7 +87,7 @@ function ProfileCard() {
         </Box>
 
         <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'>
-          Sacchi Saheli
+          {actualUserDetails?.name}
         </Text>
       </div>
     </Box>

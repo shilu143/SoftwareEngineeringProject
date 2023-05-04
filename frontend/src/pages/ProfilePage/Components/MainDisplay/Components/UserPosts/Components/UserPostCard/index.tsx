@@ -5,14 +5,29 @@ import { FaComment, FaShare } from 'react-icons/fa'
 import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
 
+interface Comment {
+  commentid: number
+  createdbywhom: number
+  parentcomment: number
+  writtentext: string
+  timecreated: Date
+  votes: number
+  postid: number
+} 
 interface UserPostCardProps {
   postActual: {
-    postId: number
-    postTitle: string
-    postUpvotes: number
-    postAuthor: string
-    postComments: number
-    postCommunity: string
+    postid: number
+    comid: number
+    comName: string
+    posttitle: string
+    createdbywhom: number
+    creatorName: string
+    timecreated: Date
+    votes: number
+    postimage: string
+    postbody: string
+    commentCount: string
+    commentRows: Comment[]
   }
 }
 
@@ -62,7 +77,7 @@ function UserPostCard({ postActual }: UserPostCardProps) {
           >
             <Icon as={BiUpvote} fontSize='1.5rem' color='blue' />
           </Button>
-          <Text fontSize='1rem'>{postActual.postUpvotes}</Text>
+          <Text fontSize='1rem'>{postActual.votes}</Text>
           <Button
             bg='transparent'
             borderColor='transparent'
@@ -87,7 +102,7 @@ function UserPostCard({ postActual }: UserPostCardProps) {
           flexDirection='column'
         >
           <Text fontSize='1.25rem' marginLeft='1rem'>
-            {postActual.postTitle}
+            {postActual.posttitle}
           </Text>
           <div
             style={{
@@ -102,10 +117,10 @@ function UserPostCard({ postActual }: UserPostCardProps) {
           >
             <Icon as={SiRiotgames} color='red' fontSize='0.75rem' />
             <Text fontSize='0.75rem' marginLeft='0.5rem'>
-              {postActual.postCommunity}
+              {postActual.comName}
             </Text>
             <Text fontSize='0.75rem' marginLeft='0.75rem'>
-              Posted By {postActual.postAuthor}
+              Posted By {postActual.creatorName}
             </Text>
           </div>
 

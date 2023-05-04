@@ -7,14 +7,13 @@ import { SiRiotgames } from 'react-icons/si'
 
 interface UserCommentCardProps {
   commentActual: {
-    commentID: number
-    commentBody: string
-    commentUpvotes: number
-    commentAuthor: string
-    commentDate: string
-    commentCommunity: string
-    postId: number
-    postTitle: string
+    commentid: number
+    createdbywhom: number
+    parentcomment: number
+    writtentext: string
+    timecreated: Date
+    votes: number
+    postid: number
   }
 }
 
@@ -64,7 +63,7 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
             }}
           >
             <Text fontSize='0.75rem' marginLeft='0.75rem' color='blue'>
-              {commentActual.commentAuthor}
+              {commentActual.createdbywhom}
             </Text>
 
             <Text fontSize='0.75rem' marginLeft='0.25rem'>
@@ -72,7 +71,7 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               commented in
             </Text>
             <Text fontSize='2.5vh' marginLeft='0.5rem'>
-              {commentActual.postTitle}
+              {commentActual.postid}
             </Text>
             <div
               style={{
@@ -91,7 +90,7 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               </Text>
               <Icon as={SiRiotgames} color='red' fontSize='0.75rem' marginLeft='0.5rem' />
               <Text fontSize='0.75rem' marginLeft='0.5rem'>
-                {commentActual.commentCommunity}
+                Some Community
               </Text>
             </div>
           </div>
@@ -122,7 +121,7 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}
               maxWidth='100%'
             >
-              {commentActual.commentBody}
+              <div dangerouslySetInnerHTML={{ __html: commentActual.writtentext }}></div>
             </Text>
           </div>
 

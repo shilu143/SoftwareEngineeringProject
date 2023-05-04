@@ -233,20 +233,23 @@ app.get("/returnDetailsOfAPost", async (req, res) => {
 });
 
 /*change votes of a post*/
-app.get("/changeVotesOfPost",async (req,res)=>{
-    const postId = req.query.postId;
-    let votes = req.query.votes;
-    console.log(`${postId} ${votes}`);
-    client.query("update posts set votes=$1 where postid=$2",[postId,votes]);
-    res.status(200).send("Votes of posts updated successfully");
+app.get("/changeVotesOfPost", async (req, res) => {
+  const postId = req.query.postId;
+  let votes = req.query.votes;
+  console.log(`${postId} ${votes}`);
+  client.query("update posts set votes=$1 where postid=$2", [postId, votes]);
+  res.status(200).send("Votes of posts updated successfully");
 });
 
 /*change votes of a comment*/
-app.get("/changeVotesOfComment",async (req,res)=>{
-    const commentId = req.query.commentId;
-    let votes = req.query.votes;
-    client.query("update comments set votes=$1 where commentId=$2",[commentId,votes]);
-    res.status(200).send("Votes of comment updated successfully");
+app.get("/changeVotesOfComment", async (req, res) => {
+  const commentId = req.query.commentId;
+  let votes = req.query.votes;
+  client.query("update comments set votes=$1 where commentId=$2", [
+    commentId,
+    votes,
+  ]);
+  res.status(200).send("Votes of comment updated successfully");
 });
 
 /*insert comments, called when a comment is added*/
@@ -325,20 +328,33 @@ app.get("/fetchCommunities", verifyToken, (req, res) => {
   });
 });
 
-app.get("/viewCommentsOfAUser",async (req,res)=>{
-    const userId = req.query.userId;
-    let allPosts =await client.query("select * from comments where createdbywhom=$1",[userId]);
-    console.log(allPosts);
-    res.status(200).send(allPosts.rows);
+app.get("/viewCommentsOfAUser", async (req, res) => {
+  const userId = req.query.userId;
+  let allPosts = await client.query(
+    "select * from comments where createdbywhom=$1",
+    [userId]
+  );
+  console.log(allPosts);
+  res.status(200).send(allPosts.rows);
 });
 
 /*fetch posts of a user*/
-app.get("/viewPostsOfAUser",async (req,res)=>{
-    const userId = req.query.userId;
-    let allPosts =await client.query("select * from posts where createdbywhom=$1",[userId]);
-    console.log(allPosts);
-    res.status(200).send(allPosts.rows);
+app.get("/viewPostsOfAUser", async (req, res) => {
+  const userId = req.query.userId;
+  let allPosts = await client.query(
+    "select * from posts where createdbywhom=$1",
+    [userId]
+  );
+  console.log(allPosts);
+  res.status(200).send(allPosts.rows);
 });
+
+app.get("/fetchDetailsOfAUser",  async (req, res) => {
+  const userId = req.query.userId;
+  let details = await client.query("select * from users where id=$1", [userId]);
+  res.status(200).send(details.rows[0]);
+});
+
 /*create post by a user in a community*/
 app.post(
   "/insertPostForACommunity",
