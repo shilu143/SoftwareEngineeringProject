@@ -163,8 +163,6 @@ const handleCreateCommunity = async () => {
 
 Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
 
-## Submodules
-
 ### • Create a Post
 #### • Implementation
 
@@ -182,8 +180,6 @@ Output | A new post is created
 ## 6. COMMENTS MODULE
 
 Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
-
-## Submodules
 
 ### • Post a Comment
 #### • Implementation
