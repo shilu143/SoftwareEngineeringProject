@@ -33,83 +33,28 @@ Below are the detailed description of the modules of our application discussed i
 
 
 # 3. Database Design
+
 A database includes bulk information deposited in a framework, making it easier to locate and explore relevant information. A well-designed database contains accurate and up-to-date information, allowing data to be fetched easily whenever needed.
+
 We have implemented a database with minimum redundancy which reduces the probability of faults and discrepancies within the database.
-It explains the database ER mentioned in high level design document [here](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/High-Level-Design-Document#database-design).
-We have created following tables in the database:
 
-Note: All the **Bold** attributes below act as primary key.
-<pre>
-<b>USER - This collection will contain all the registered users and only these users will be able to login
-into the system.</b>
-Attributes:
-User_Type :             varchar(20)    (student/faculty)
-Username:               varchar(20)      
-Email:                  string         (Only college Ids have access to app).
-<b>Mobile No:</b>              int(10)        [Primary Key]
-Encrypted Password:     string         (Auto encrypted by firebase auth).
-</pre>
+- The CREATE SCHEMA public statement creates a new schema named "public". This schema will hold all the tables that will be created later in the script.
 
+- Next, the script creates five tables named "users", "communities", "posts", "comments", and "communityUser".
 
+- The "users" table has columns for the user ID, email, name, gender, age, password, and profile image. The SERIAL PRIMARY KEY statement creates an auto-incrementing ID for each new row.
 
-<pre>
-<b>CLASSROOMS - This collection will contain all the classrooms that can be booked. These classrooms can be 
-booked by users for their use.</b>
-Department_Name :       varchar(30) 
-<b>Room_Name :</b>             varchar(5)
-Capacity :              int(5) 
-<b>Slots :</b>                 string
-<b>Date</b> :                  DateandTime
-Availability_Status :   int(2)           [ 00: Booked  01: Unavailable   : 10: AcadSlots]
-</pre>
+- The "communities" table has columns for community ID, community name, user ID who created the community, time of creation, category (which can have multiple values), and community profile image. The SERIAL PRIMARY KEY statement creates an auto-incrementing ID for each new row, and the REFERENCES statement specifies that the createdByWhom column should reference the id column in the users table.
 
-<pre>
-<b>LAB EQUIPMENT - This collection will contain all the lab equipment that can be booked. These lab equipment can be
-booked by users for their use.</b>
-Attributes:
-Department_Name :           varchar(30)   
-<b>Lab_Name :</b>                  varchar(20)      
-Equipments :                string
-<b>Slots :</b>                     string
-<b>Date :</b>                      DateandTime
-Availability_Status :       int(2)               [ 00: Booked  01: Unavailable   10: AcadSlots]
-</pre>
+- The "posts" table has columns for post ID, community ID (the ID of the community to which the post belongs), post title, post body, user ID who created the post, time of creation, number of votes, and post image. The SERIAL PRIMARY KEY statement creates an auto-incrementing ID for each new row, and the REFERENCES statement specifies that the createdByWhom and comId columns should reference the id and comId columns in the users and communities tables, respectively.
 
-<pre>
-<b>SPORTS COMPLEX - This collection will have all the sports complexes that can be booked.</b>
-Sport_type :            varchar(30)
-<b>Field_name :</b>            varchar(20)
-<b>Slots :</b>                 string
-<b>Date :</b>                  DateandTime
-Availability_Status :   int(2)              [ 00: Booked  01: Unavailable   10: AcadSlots]
-</pre>
+- The "comments" table has columns for comment ID, user ID who created the comment, parent comment ID (if any), written text, time of creation, number of votes, and post ID to which the comment belongs. The SERIAL PRIMARY KEY statement creates an auto-incrementing ID for each new row, and the REFERENCES statement specifies that the createdByWhom and postId columns should reference the id and postId columns in the users and posts tables, respectively.
 
-<pre>
-<b>BOOKING RECORD - This collection will have all the bookings made till now through which a particular 
-booking can be tracked easily.</b>
-<b>Booking_id :</b>              int(11)    
-Booked_By :               int(10)            Foreign key referenced to mobile in USER table.
-Booked_On :               DateandTime
-Booked_Facility_Name :    varchar(20)
-Purpose_Of_Booking :      text
-Slot_Booked :             string
-Date_Booked :             DateandTime
-</pre>
+- The "votePosts" table has columns for post ID and user ID, to keep track of which user voted for which post. The REFERENCES statement specifies that the postId and userId columns should reference the postId and id columns in the posts and users tables, respectively.
 
-<pre>
-<b>COURSE RECORD - This collection will have all the details pertaining to the courses being taken.</b>
-<b>Course_ID :</b>          varchar(10)
-Professor :          varchar(30)
-<b>Student_ID :</b>         varchar(10)     Foreign key referenced to username in USER table.
-<b>Room_Name :</b>          varchar(5)      Foreign key referenced to room_name in CLASSROOM table.
-<b>Slot :</b>               string          (Among one of available slot selected from CLASSROOM table)
-<b>Date :</b>               DateandTime
-Attedance_Status :   bool            [present/absent]
-Semester :           int(5)
-Year :               int(10)
-</pre>
+- The "voteComments" table has columns for comment ID and user ID, to keep track of which user voted for which comment. The REFERENCES statement specifies that the commentId and userId columns should reference the commentId and id columns in the comments and users tables, respectively.
 
-This database might change to some extent during development process for better performance and for making future integrations to application easier.
+- The "communityUser" table has columns for user ID and community ID, to keep track of which users are members of which communities. The REFERENCES statement specifies that the userId and comId columns should reference the id and comId columns in the users and communities tables, respectively.
 
-
+Overall, this script creates a schema and tables to store information related to users, communities, posts, comments, and votes in a social media application or similar platform.
 ***
