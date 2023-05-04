@@ -20,7 +20,7 @@ function MainDisplay() {
         height: '100vh',
         marginBottom: '0px',
         marginLeft: 'auto',
-        marginRight: '3vh',
+        marginRight: '1.5rem',
         borderRadius: '10px',
         // overflowY: 'scroll',
         paddingBottom: '0px',
@@ -44,11 +44,11 @@ function MainDisplay() {
           style={{ display: 'flex', width: 'auto', position: 'sticky' }}
           centered
         >
-          <Tab label='Posts' style={{ display: 'flex', width: '30vh' }} />
-          <Tab label='Comments' style={{ display: 'flex', width: '30vh' }} />
-          <Tab label='Likes' style={{ display: 'flex', width: '30vh' }} />
+          <Tab label='Posts' style={{ display: 'flex', width: '15rem' }} />
+          <Tab label='Comments' style={{ display: 'flex', width: '15rem' }} />
+          <Tab label='Likes' style={{ display: 'flex', width: '15rem' }} />
         </Tabs>
-        <div style={{ display: 'flex-inline', height: '93vh', overflowY: 'auto' }}>
+        <div style={{ display: 'flex-inline', height: '95vh', overflowY: 'auto' }}>
           {currentTab === 0 && <UserPosts />}
           {currentTab === 1 && <UserComments />}
           {currentTab === 2 && <Box>Page 3 Content</Box>}

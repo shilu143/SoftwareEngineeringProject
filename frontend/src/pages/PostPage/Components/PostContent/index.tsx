@@ -1,37 +1,68 @@
 // import './PostPage.css'
-import { Box, Flex, Icon, Heading, Text, Button, Center } from '@chakra-ui/react'
+import { Box, Flex, Icon, Image, Heading, Text, Button, Center } from '@chakra-ui/react'
 import { FaComment, FaShare } from 'react-icons/fa'
 import { BiUpvote, BiDownvote } from 'react-icons/bi'
 import { SiRiotgames } from 'react-icons/si'
 
-function PostContent() {
+interface PostContentProps {
+  actualPost: {
+    postid: number
+    comid: number
+    comName: string
+    posttitle: string
+    postbody: string
+    createdbywhom: number
+    creatorName: string
+    timecreated: Date
+    votes: number
+    postimage: string
+    commentCount: string
+    commentRows: Comment[]
+  }
+}
+interface Comment {
+  commentid: number
+  createdbywhom: number
+  parentcomment: number
+  writtentext: string
+  timecreated: Date
+  votes: number
+  postid: number
+}
+
+function PostContent({ actualPost }: PostContentProps) {
+  if (!actualPost) {
+    return <div>Loading...</div>
+  }
   return (
     <Box
       bg='white'
       color='black'
-      h='auto'
-      w='100vh'
+      h='fit-content'
+      w='50vw'
+      maxWidth='50rem'
       //   position='relative'
       //   top='0%'
       //   left='-10%'
       display='flex'
-      justifyContent='center'
+      justifyContent='flex-start'
       alignItems='left'
-      paddingBottom='0vh'
-      paddingRight='2vh'
-      paddingTop='0.5vh'
+      paddingBottom='0rem'
+      paddingRight='1rem'
+      paddingTop='0.25rem'
       flexDirection='row'
-      marginBottom='1vh'
+      marginBottom='0.5rem'
+      // marginLeft='0.5vw'
     >
       <Box
         bg='white'
         color='black'
-        w='5vh'
-        h='auto'
+        w='2.5rem'
+        h='fit-content'
         display='flex'
         justifyContent='flex-start'
         alignItems='center'
-        paddingTop='2vh'
+        paddingTop='1rem'
         flexDirection='column'
       >
         <Button
@@ -43,9 +74,9 @@ function PostContent() {
           h='fit-content'
           w='fit-content'
         >
-          <Icon as={BiUpvote} fontSize='3vh' color='blue' />
+          <Icon as={BiUpvote} fontSize='1.5rem' color='blue' />
         </Button>
-        <Text fontSize='2vh'>69</Text>
+        <Text fontSize='1rem'>{actualPost.votes}</Text>
         <Button
           bg='transparent'
           borderColor='transparent'
@@ -55,61 +86,84 @@ function PostContent() {
           h='fit-content'
           w='fit-content'
         >
-          <Icon as={BiDownvote} fontSize='3vh' color='blue' />
+          <Icon as={BiDownvote} fontSize='1.5rem' color='blue' />
         </Button>
       </Box>
       <Box
         bg='white'
         color='black'
-        w='95vh'
-        h='auto'
+        w='auto'
+        h='fit-content'
         display='flex'
-        justifyContent='center'
+        justifyContent='flex-start'
         alignItems='left'
-        paddingBottom='5vh'
+        paddingBottom='0rem'
         flexDirection='column'
       >
         <div
           style={{
             display: 'flex',
-            height: '1.5vh',
+            height: 'fit-content',
             marginBottom: '0px',
             paddingBottom: '0px',
             alignItems: 'center',
             // justifyContent: 'center',
           }}
         >
-          <Icon as={SiRiotgames} color='red' fontSize='1.5vh' />
-          <Text fontSize='1.5vh' marginLeft='1.5vh'>
-            r/CompetitiveApex
+          <Text fontSize='0.75rem' marginLeft='0.75rem' color='blue'>
+            {actualPost.creatorName}
+          </Text>
+          <Text fontSize='0.75rem' marginLeft='0.25rem'>
+            posted in
+          </Text>
+          <Icon as={SiRiotgames} color='red' fontSize='0.75rem' marginLeft='0.75rem' />
+          <Text fontSize='0.75rem' marginLeft='0.5rem'>
+            {actualPost.comName}
           </Text>
         </div>
-        <Heading fontSize='4vh' marginLeft='1.5vh' marginTop='2vh'>
-          Is there a bright future for Apex without a strong competitive scene?
-        </Heading>
-        <Text fontSize='2vh' marginLeft='1.5vh'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <Text h='0.6rem' fontSize='1.75rem' marginLeft='0.75rem' marginTop='0rem'>
+          {actualPost.posttitle}
         </Text>
-        <Flex alignItems='center' mt='2vh'>
-          <Icon as={FaComment} fontSize='2vh' color='blue' marginLeft='2vh' />
-          <Text fontSize='2vh'>10 comments</Text>
+        <div
+          style={{
+            width: 'auto',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Image
+            src={actualPost.postimage}
+            // alt='Example image'
+            w='100%'
+            marginLeft='0.75rem'
+            marginTop='2rem'
+          />
+        </div>
+        <Text fontSize='1rem' marginLeft='0.75rem'>
+          {actualPost.postbody}
+        </Text>
+        <Flex alignItems='center' mt='1rem'>
+          <Icon as={FaComment} fontSize='1rem' color='blue' marginLeft='1rem' />
+          <Text fontSize='1rem' marginLeft='0.25rem'>
+            {actualPost.commentCount} comments
+          </Text>
           <Button
             bg='transparent'
             borderColor='transparent'
             display='flex'
             justifyContent='center'
             alignItems='center'
-            h='5vh'
+            h='2.5rem'
             w='fit-content'
-            paddingLeft='0.5vh'
-            marginLeft='1vh'
+            paddingLeft='0.25rem'
+            marginLeft='0.5rem'
             _hover={{ backgroundColor: '#d1d1d1' }}
             style={{ transition: 'ound-color 0.3s, color 0.3s' }}
           >
-            <Icon as={FaShare} fontSize='3vh' color='blue' />
-            <Text fontSize='2vh'>Share</Text>
+            <Icon as={FaShare} fontSize='1.5rem' color='blue' />
+            <Text fontSize='1rem'>Share</Text>
           </Button>
         </Flex>
       </Box>

@@ -15,24 +15,25 @@ function ProfileCard() {
     <Box
       bg='white'
       color='black'
-      w='50vh'
-      h='50vh'
+      w='25vw'
+      maxWidth='50rem'
+      h='40rem'
       display='flex'
       justifyContent='center'
       alignItems='center'
-      paddingBottom='5vh'
+      paddingBottom='2.5rem'
       flexDirection='column'
-      marginLeft='2.5vh'
-      marginTop='20vh'
-      border='0.5vh solid red'
+      marginLeft='1.25rem'
+      marginTop='10rem'
+      border='0.25rem solid red'
     >
       <div>
-        <Box w='20vh' h='20vh' borderRadius='50%' overflow='hidden' position='relative'>
+        <Box w='10rem' h='10rem' borderRadius='50%' overflow='hidden' position='relative'>
           <Image
             src='/assets/images/fububi.png'
             alt='Example image'
             borderRadius='full'
-            boxSize='20vh'
+            boxSize='10rem'
             objectFit='cover'
             // _hover={{ filter: 'blur(8px)' }}
           />
@@ -59,7 +60,7 @@ function ProfileCard() {
           </Box>
         </Box>
 
-        <Text fontSize='2vh' marginLeft='' fontWeight='bold' textAlign='center'>
+        <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'>
           Sacchi Saheli
         </Text>
       </div>

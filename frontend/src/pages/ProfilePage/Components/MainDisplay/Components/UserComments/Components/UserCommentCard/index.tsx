@@ -32,15 +32,15 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
         display='flex'
         justifyContent='flex-start'
         alignItems='left'
-        paddingBottom='0vh'
-        paddingRight='2vh'
-        paddingTop='0.5vh'
+        paddingBottom='0rem'
+        paddingRight='1rem'
+        paddingTop='0.25rem'
         flexDirection='row'
-        marginBottom='0.5vh'
+        marginBottom='0.25rem'
         // borderBottom='0.25vh solid gray'
-        borderTop='0.25vh solid gray'
-        borderLeft='0.25vh solid gray'
-        borderRight='0.25vh solid gray'
+        borderTop='0.125rem solid gray'
+        borderLeft='0.125rem solid gray'
+        borderRight='0.125rem solid gray'
       >
         <Box
           bg='white'
@@ -50,47 +50,47 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
           display='flex'
           justifyContent='center'
           alignItems='left'
-          paddingBottom='0vh'
+          paddingBottom='0rem'
           flexDirection='column'
         >
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              height: '4vh',
+              height: '2rem',
               width: '100%',
               flexDirection: 'row',
-              borderBottom: '0.1vh solid gray',
+              borderBottom: '0.05rem solid gray',
             }}
           >
-            <Text fontSize='1.5vh' marginLeft='1.5vh' color='blue'>
+            <Text fontSize='0.75rem' marginLeft='0.75rem' color='blue'>
               {commentActual.commentAuthor}
             </Text>
 
-            <Text fontSize='1.5vh' marginLeft='0.5vh'>
+            <Text fontSize='0.75rem' marginLeft='0.25rem'>
               {' '}
               commented in
             </Text>
-            <Text fontSize='2.5vh' marginLeft='1vh'>
+            <Text fontSize='2.5vh' marginLeft='0.5rem'>
               {commentActual.postTitle}
             </Text>
             <div
               style={{
                 display: 'flex',
-                height: '1.5vh',
+                height: '0.75rem',
                 marginBottom: '0px',
-                marginLeft: '2vh',
+                marginLeft: '1rem',
                 paddingBottom: '0px',
                 alignItems: 'center',
                 // justifyContent: 'center',
               }}
             >
-              <Text fontSize='1.5vh' marginLeft='0.5vh'>
+              <Text fontSize='0.75rem' marginLeft='0.25rem'>
                 {' '}
                 in{' '}
               </Text>
-              <Icon as={SiRiotgames} color='red' fontSize='1.5vh' marginLeft='1vh' />
-              <Text fontSize='1.5vh' marginLeft='1vh'>
+              <Icon as={SiRiotgames} color='red' fontSize='0.75rem' marginLeft='0.5rem' />
+              <Text fontSize='0.75rem' marginLeft='0.5rem'>
                 {commentActual.commentCommunity}
               </Text>
             </div>
@@ -100,7 +100,7 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               display: 'flex',
               height: 'auto',
               marginBottom: '0px',
-              marginLeft: '2vh',
+              marginLeft: '1rem',
               paddingBottom: '0px',
               alignItems: 'center',
               // justifyContent: 'center',
@@ -114,8 +114,8 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               Posted By {commentActual.commentAuthor}
             </Text> */}
             <Text
-              fontSize='1.8vh'
-              marginLeft='1.5vh'
+              fontSize='0.9rem'
+              marginLeft='0.75rem'
               textOverflow='ellipsis'
               //   whiteSpace='nowrap'
               overflow='hidden'
@@ -126,24 +126,24 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
             </Text>
           </div>
 
-          <Flex alignItems='center' mt='2vh'>
-            <Icon as={FaComment} fontSize='2vh' color='blue' marginLeft='2vh' />
-            <Text fontSize='2vh'>10 comments</Text>
+          <Flex alignItems='center' mt='1rem'>
+            <Icon as={FaComment} fontSize='1rem' color='blue' marginLeft='1rem' />
+            <Text fontSize='1rem'>10 comments</Text>
             <Button
               bg='transparent'
               borderColor='transparent'
               display='flex'
               justifyContent='center'
               alignItems='center'
-              h='5vh'
+              h='2.5rem'
               w='fit-content'
-              paddingLeft='0.5vh'
-              marginLeft='1vh'
+              paddingLeft='0.25rem'
+              marginLeft='0.5rem'
               _hover={{ backgroundColor: '#d1d1d1' }}
               style={{ transition: 'ound-color 0.3s, color 0.3s' }}
             >
-              <Icon as={FaShare} fontSize='3vh' color='blue' />
-              <Text fontSize='2vh'>Share</Text>
+              <Icon as={FaShare} fontSize='1.5rem' color='blue' />
+              <Text fontSize='1rem'>Share</Text>
             </Button>
             <Button
               bg='transparent'
@@ -151,15 +151,15 @@ function UserCommentCard({ commentActual }: UserCommentCardProps) {
               display='flex'
               justifyContent='center'
               alignItems='center'
-              h='5vh'
+              h='2.5rem'
               w='fit-content'
-              paddingLeft='0.5vh'
-              marginLeft='1vh'
+              paddingLeft='0.25rem'
+              marginLeft='0.5rem'
               _hover={{ backgroundColor: '#d1d1d1' }}
               style={{ transition: 'ound-color 0.3s, color 0.3s' }}
             >
-              <Icon as={EditIcon} fontSize='3vh' color='blue' />
-              <Text fontSize='2vh'>Edit</Text>
+              <Icon as={EditIcon} fontSize='1.5rem' color='blue' />
+              <Text fontSize='1rem'>Edit</Text>
             </Button>
           </Flex>
         </Box>
