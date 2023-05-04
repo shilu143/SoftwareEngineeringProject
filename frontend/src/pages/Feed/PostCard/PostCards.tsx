@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import PostCard from './PostCard';
 
-function PostCards() {
-  
-  const [postIds, setPostIds] = useState<string[]>(['adsf','asdfasdf','asdfsad']);
+import React, { useState, useEffect, useContext } from 'react';
+import PostCard from './PostCard';
+import { AuthContext } from '../../../context/AuthContext';
+import axios from 'axios';
+
+interface Props {
+  comid: string;
+}
+function PostCards({ comid }: Props) {
+
+  const [postIds, setPostIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const user = useContext(AuthContext).user;
 
   useEffect(() => {
-    const fetchPostIds = async () => {
-      setLoading(true);
-      const response = await fetch('backend-url');
-      const data = await response.json();
-      setPostIds(prevPostIds => [...prevPostIds, ...data]);
-      setLoading(false);
-    };
-    fetchPostIds();
-  }, []);
+    const caller = async () => {
+      const params = {comid:comid}
+      const headers= {Authorization: `Bearer ${user?.token}`}
+      const response = await axios.get('/fetchPostsOfCommunity', {headers,params})
+      const pp = response.data.map((post:any) => String(post.postid));
+      setPostIds(pp)
+    }
+    caller()
 
-  const fetchMorePostIds = async () => {
-    setLoading(true);
-    const response = await fetch('backend-url');
-    const data = await response.json();
-    setPostIds(prevPostIds => [...prevPostIds, ...data]);
-    setLoading(false);
-  };
+  }, [user]);
+
 
   return (
     <div>
       {postIds.map(postId => (
         <PostCard key={postId} postid={postId} />
       ))}
-      {loading && <div>Loading...</div>}
     </div>
   );
 }
