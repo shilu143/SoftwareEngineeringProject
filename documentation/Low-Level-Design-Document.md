@@ -18,7 +18,7 @@ Below are the detailed description of the modules of our application discussed i
 
 - **Database Management Module** - This module will be managed solely by the admin where he will manage database related tasks like adding/deleting/updating a user to the database. Also, the admin can monitor all the activity going on.
 
-<img src="images/database.jpeg"></img>
+<img src="images/databaseDesign.jpeg"></img>
 
 - **Community Module** - The major module of our application. All the community related activities will be handled by this module. The major things handled will be the credibility to post in the community and to comment under a post. All the posts and comments will be maintained in the database.
 
