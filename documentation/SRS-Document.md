@@ -160,8 +160,6 @@ No specific hardware features and requirements.
 
 <img src="images/interface2.jpeg">
 
-<img src="images/interface3.jpeg">
-
 
 **Hardware Interfaces** No specific hardware interface. The device used to open the software should have internet access.
 
