@@ -73,76 +73,76 @@ Following Features will be provided by our Product:-
 • <b>DESCRIPTION & PRIORITY</b>
 To use the system, user first registers in the site by filling a simple form, the link of 
 which is provided in the home page. 
-    <b>PRIORITY</b>: High
+<b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User in homepage, clicked ‘Sign Up’
+<b>PRECONDITION</b>: User in homepage, clicked ‘Sign Up’
 1. User fills the form and submit
 2. Form validation checks to be passed for successful registration
-    <b>POST CONDITION</b>: The user get their account registered
+<b>POST CONDITION</b>: The user get their account registered
 </pre>
 
 ### 2. User Login
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
 The user login in the login window provided in the homepage.
-    <b>PRIORITY</b>: High
+<b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User in homepage, clicked ‘Log In’
+<b>PRECONDITION</b>: User in homepage, clicked ‘Log In’
 1. User fill login form and submit it
 2. User login credentials are validated
 3. If login info is not correct or all fields are not filled, submission fails and resubmission is required
 4. If successfully submitted redirect to dashboard
-    <b>POST CONDITION</b>: The user get logged in
+<b>POST CONDITION</b>: The user get logged in
 </pre>
 
 ### 3. Search Feature
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
 User can search for the posts and communities
-    <b>PRIORITY</b>: Medium
+<b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User logged in the account
+<b>PRECONDITION</b>: User logged in the account
 1. User opt to search for something
 2. Typing search query provides available options from database
-    <b>POST CONDITION</b>: user gets the required list of search query
+<b>POST CONDITION</b>: user gets the required list of search query
 </pre>
 
 ### 4. Comment on a Post
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
 The user wants to comment an exiting post
-    <b>PRIORITY</b>: High
+<b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User is logged in
+<b>PRECONDITION</b>: User is logged in
 1. User click on the post
 2. He types the comment and presses enter
-    <b>POST CONDITION</b>: The comment is visible to everyone
+<b>POST CONDITION</b>: The comment is visible to everyone
 </pre>
 
 ### 5. Create a Community
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
     User can create a community
-    <b>PRIORITY</b>: Medium
+<b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User is logged in
+<b>PRECONDITION</b>: User is logged in
 1. User clicks on the 'Create a Community' Button
 2. User fills out the form
 3. Confirms the details
-    <b>POST CONDITION</b>: A new community is created
+<b>POST CONDITION</b>: A new community is created
 </pre>
 
 ### 5. Create a Post
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
     User can create a post
-    <b>PRIORITY</b>: Medium
+<b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-    <b>PRECONDITION</b>: User is logged in
+<b>PRECONDITION</b>: User is logged in
 1. User clicks on the 'Create new post' Button
 2. User makes a post
 3. Confirms the details
-    <b>POST CONDITION</b>: A new post is created
+<b>POST CONDITION</b>: A new post is created
 </pre>
 
 No specific hardware features and requirements.
