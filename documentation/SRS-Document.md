@@ -181,7 +181,7 @@ System should be secure in terms of user information, user friendly and robust. 
 **Portability**: The portability of the project is one of its strengths, as it allows users to access and engage with the platform from virtually anywhere with an internet connection.
 
 ***
-# 6. Database Requirements (this section not edited)
+# 6. Database Requirements
 Refer [LLD section](./Low-Level-Design-Document.md#4-database-design)
 
 ***
