@@ -86,9 +86,16 @@ function ProfileCard() {
           </Box>
         </Box>
 
-        <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'>
+        <Text fontSize='2rem' marginLeft='' fontWeight='bold' textAlign='center'>
           {actualUserDetails?.name}
         </Text>
+        <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'>
+          Age: {actualUserDetails?.age}
+        </Text>
+        <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'>
+          Sex: {actualUserDetails?.gender}
+        </Text>
+        <Text fontSize='1rem' marginLeft='' fontWeight='bold' textAlign='center'></Text>
       </div>
     </Box>
   )

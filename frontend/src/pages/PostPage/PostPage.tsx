@@ -8,7 +8,10 @@ import { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-function PostPage() {
+interface PostPageProps {
+  actualPostid: number
+}
+function PostPage({ actualPostid }: PostPageProps) {
   interface Post {
     postid: number
     comid: number
@@ -94,11 +97,13 @@ function PostPage() {
     setComment('')
   }
 
+  const toBeused = actualPostid
   useEffect(() => {
     axios
-      .get('http://localhost:5000/returnDetailsOfAPost?postId=1')
+      .get(`http://localhost:5000/returnDetailsOfAPost?postId=${toBeused}`)
       .then((response) => {
         setPostData(response.data[0])
+        console.log(toBeused)
         // setCommentRows(response.data[0].commentRows)
       })
       .catch((error) => {

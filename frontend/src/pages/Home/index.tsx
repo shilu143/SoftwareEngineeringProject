@@ -15,7 +15,7 @@ const Home = () => {
     <>
       {/* <h1>This is Home Page</h1> */}
       {/* <h2> backend data = {backend.toString()}</h2> */}
-      <ProfilePage />
+      <PostPage actualPostid={1} />
     </>
   )
 }

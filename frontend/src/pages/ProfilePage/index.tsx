@@ -7,8 +7,6 @@ import MainDisplay from './Components/MainDisplay'
 import ProfileCard from './Components/ProfileCard'
 
 function ProfilePage() {
-  
-
   return (
     <div
       style={{
