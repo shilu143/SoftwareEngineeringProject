@@ -29,7 +29,7 @@ This is a social aggregation, discussion, and community-driven platform which pr
 
 ### 3.1 How to use the platform
 - Website has been deployed [here]().
-- Best supported with Google Chrome browser
+- Smoothly Supported with Mozilla Firefox and Google Chrome
 
 ### 3.2 How to run locally
 
