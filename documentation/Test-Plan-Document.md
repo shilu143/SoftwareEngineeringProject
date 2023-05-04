@@ -15,19 +15,18 @@
     - [Booking](#42-booking)
     - [User Bookings](#43-user-bookings)
     - [Attendance](#44-attendance)
-    - [User Profile](#45-user-profile)
-    - [Admin Portal](#46-admin-portal)    
+    - [User Profile](#45-user-profile)   
 
 - [Resource & Environment Needs](#5-resource--environment-needs)
 
 ## 1. INTRODUCTION
 
 ### 1.1 Project Description
-Campus Facility Booking Application will be a platform where Professors will be able to book classrooms, students will be able to book lab equipment for their usage and they can also book tennis, volleyball and basketball courts. Also students will be able to mark their attendance for the ongoing classes. All this will be provided by the app.
+The platform is a social news aggregation and discussion website where registered members submit content in the form of text posts or direct links. Users can upvote or downvote posts and comments, which determines their visibility on the site, as well as participate in discussions by commenting on posts.
 
 
 ### 1.2 Document Purpose
-The purpose of this document is to describe the objectives, scope, resources, and methodology for the Test Plans of our Campus Facility Booking Application. The plan typically contains a detailed understanding of the eventual workflow to verify and ensure that the app meets its design specifications and other requirements.
+The purpose of a Test Plan document is to provide a clear and comprehensive roadmap for the testing effort, ensuring that all aspects of the software are thoroughly tested and that the testing is conducted in an organized and efficient manner. It also serves as a reference point for all stakeholders involved in the project, providing a clear understanding of the testing strategy and approach.
 
 **CONVENTIONS USED**
 Acronym |   Meaning |
@@ -35,69 +34,52 @@ Acronym |   Meaning |
 API |	Application Program Interface |
 AUT |	Application Under Test |
 SRS | Software Requirement Specifications |
-CFB | Campus Facility Booking |
 
 ### 1.3 Objectives
-Integration Testing is done because :-
-- Earlier feedback on the acceptability of the individual module will be available
-- Ensure the AUT conforms to functional and non-functional requirements
-- Ensure the AUT is correct with software requirements and design constraints
-- Bugs/issues are identified and fixed before go live
-- Scheduling of Defect fixes is flexible, and it can be overlapped with development
-- Correct data flow, control flow, timing and database usage
-
-
+The objectives of testing can vary depending on the specific project and software being tested, but generally include:
+- Finding defects or errors: Testing helps identify defects or errors in the software, including functionality issues, performance problems, and security vulnerabilities.
+- Ensuring quality: Testing ensures that the software meets the desired level of quality and reliability, and that it meets the user's needs and expectations.
+- Improving user experience: Testing can help identify and fix issues that impact the user experience, such as usability problems or confusing interfaces.
+- Increasing confidence: Testing can increase confidence in the software, both for the development team and for the end-users, by demonstrating that the software works as intended.
+- Reducing costs: Testing can help identify and fix defects earlier in the development process, which can save time and money by avoiding costly fixes later on.
 
 ## 2. TEST ITEMS
 
 ### 2.1 In Scope
-Scope defines the features, functional or non-functional requirements of the software that will be tested. All the features of CFB which were defined in SRS are to be tested.
+Scope defines the features, functional or non-functional requirements of the software that will be tested. All the features of the project which were defined in SRS are to be tested.
 
 Features to be tested:
 
 **1. Authentication**
 
-- A new user should be able to sign up successfully into the app by filling all the necessary information and then verifying their mobile number by OTP verification. 
-- Once mobile number is verified, he/she can log in with the same credentials only into the app.
+- A new user should be able to sign up successfully into the app by filling all the necessary information.
 - Existing users can directly log in into the app and once logged in, they should be kept logged in until they sign out by themselves.
-- If an existing user forgets his/her password, he/she should be able to recover that using the email address submitted.
-- The app should distinguish the users as students and professors(taken as input during sign up) and after logging in, the respective functionalities should be provided to them by the app.
 
-**2. Booking**
+**2. Posts**
 
-- Logged in Users should be able to book classrooms, labs and sports complexes based on availability.
-- They should be able to see all the slots of their chosen classroom, lab or sport complex for a particular chosen date.
-- Selecting any available slot should proceed them to a confirmation page where they would fill their purpose of booking and complete the booking procedure.
-- The slots for booking should be available for next 7 days from current date.
-- For classrooms, booking a classroom by capacity should be there in which the user can select the capacity and based on that all classroom of that particular capacity only should be provided for booking.
+- Logged in users should be able to create posts, which can include text and image content.
+- They should be able to upvote or downvote the posts in accordance with their interests.
+- The posts should appear from the communities the user follows.
 
-**3. User Bookings**
-- Existing Users should be able to view all their booking history. The booking history should be sorted by date and should show real time situation like 
-'completed' - Bookings which have been completed ,
-'ongoing' - Bookings which are currently going on ,
-'upcoming' - Bookings yet to come.
-- A filter should also be given so that only classroom bookings, lab bookings or sports bookings can be seen.
-- In the same Booking history, an Attendance showing button for classrooms and labs should be there which can show who have attended this particular classroom or lab and should return the count. 
+**3. Comments**
+- Existing Users should be able to comment on the posts.
+- The comments should be visible beneath the posts to all the users.
+- The post owner should be able to delete irrelevant comments.
 
-**4. Attendance**
+**4. Community**
 
-- If an user is within 10 meter radius of a defined geo location of a booked classroom which is currently going on , he should be able to see that classroom available for marking attendance. For this feature to work, the GPS should be enabled on the user's mobile.
-- Once marked, he should not see the same classroom again and the data should be saved , one in the attendance history of the booked room and the other in the user's attendance history.
-- Later, one can view attendees of his/her booked classroom as mentioned in the User Bookings and the user should also see their all the attended classrooms.
+- If an user is logged in, they should be able to join the community of their interest.
+- A registered user should also be able to create a community of their own.
+- The posts under a certain community should be visible to people visiting that community, or the people who are a part of the community.
 
 **5. User Profile**
 
 - Existing Users can view their profile an upload their photo and perform necessary changes.
-- A change password option should also be available so that they can change his/her password by submitting previous password and new password.
-
-**6. Admin Portal**
-
-- A separate web portal for admin should be there where adding of a new classroom, lab and sport is provided along with altering existing classrooms, labs and sports complexes.
-- Admin should also view all the users along with their booking history.
-- Admin should be able to handle slot adding and deleting effectively to manage the database constraints. 
+- The user should be able to see the profile of another user from posts/comments.
 
 
-### 2.2 Out Of Scope
+
+### 2.2 Out Of Scope (not edited from here)
 Out Of Scope defines the features, functional or non-functional requirements of the software that will NOT be tested
 
 - Fused Location Provider API : Used to fetch user real time location. Need not be tested as it is third party API and is assumed to be reliable & accurate.
@@ -213,8 +195,3 @@ Mentions the minimum requirements that will be used to test the Campus Facility 
 Mentions the minimum requirements that will be used to test the Web Based Admin :-
 - Desktop with modern web browser like Chrome, Firefox
 - Internet Access
-
-## References
-* [Wikipedia](https://en.wikipedia.org/wiki/Test_plan)
-* [Link 1](https://www.softwaretestinghelp.com/how-to-write-test-plan-document-software-testing-training-day3/)
-* [Link 2](https://www.professionalqa.com/test-case-vs-test-plan)
