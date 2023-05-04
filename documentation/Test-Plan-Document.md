@@ -70,10 +70,9 @@ Features to be tested:
 
 
 
-### 2.2 Out Of Scope (not edited from here)
+### 2.2 Out Of Scope
 Out Of Scope defines the features, functional or non-functional requirements of the software that will NOT be tested
 
-- Fused Location Provider API : Used to fetch user real time location. Need not be tested as it is third party API and is assumed to be reliable & accurate.
 - Database security : Need not be tested as we are using Firebase and is assumed to be reliable.
 - Communication Interfaces : The reliable HTTP protocol is used for communication between server application and client.
 
