@@ -14,48 +14,35 @@
 # 1. Introduction
 A Software Requirements Specification (SRS) document is a comprehensive description of the intended purpose, functionality, and behavior of a software system. The primary purpose of an of this document is to provide a detailed and clear description of the software requirements to stakeholders. Requirements described in this document will be used as guidelines to develop the application.
 
-## Document Conventions
-* CFB : Campus Facility Booking application
-* SRS : Software Requirements Specification
-* Admin : user with administrator privileges
-* Client : Intended Users of the application
-* REQ: Requirement
-
 ## Project Purpose
-For booking different facilities at campus such as Lecture halls, lab & lab equipment, sports facilities etc… one has to approach authorities and request for booking. This traditional booking process is time consuming and hectic. To tackle this, we want to build an advanced single booking software for all facilities that will be efficient and also will reduce the staff workload and save time.
- 
-Now the entire facilities booking management will be done online and on the tip of our hands. This makes the booking process easier and on the road. The application will be used by the students, faculties, clubs representatives and members.
+The purpose of of this project is to provide the users a platform to share, discuss and discover content on a wide range of topics. It is similar to reddit, a social news aggregation and discussion website where registered members can submit content in the form of text posts, images or direct links. Users can upvote or downvote posts and comments, which determines their visibility on the site, as well as participate in discussions by commenting on posts.
 
-This campus facility booking application will facilitate the following :-
-* Allow teachers and students to book room for holding classes or events.
-* Allow students to book usage of lab equipment.
-* A web based application for admin access for the same
-* Allow peers for booking tennis, badminton etc.. courts.
-* Allow students to mark their presence via location based attendance system
+The purpose of of the platform is to provide a space for individuals to share and discuss content and ideas, connect with like-minded individuals, and stay up-to-date on the latest news and trends in various fields, and the platform is driven by user-generated content, which means that the content on the platform is often more diverse and interesting than what is found on traditional news or social media websites.
 
 ## Project Scope
-This platform provides an easy and effective way for faculties, representatives and authorities to book/reserve facilities available at the campus. The benefits of this is that the traditional booking methods (like going to the authority & request to book) are upgraded with interactive real-time booking support on the tips of your hand. Along with that this system will manage student attendance record and will save class time by automatic attendance system.
- 
-This will allow teachers and students to book rooms for holding classes or events, and allow students to book usage of lab equipment. A web based application for admin access will be there. Also peers can book tennis, badminton etc courts.
+Some of the key areas of scope for the project include:
+- Discussion: It provides a platform for users to engage in online discussions on a wide range of topics. 
+- Content sharing: It allows users to share content in various forms, including text, images, and links. Users can submit their own content or share content from other sources, making it a hub for content discovery and sharing.
+- Community building: It is designed to foster the growth of online communities around specific topics or interests.
+
+Overall, the scope of the project is quite broad, as it is designed to be a flexible platform that can accommodate a wide range of interests and activities.
 
 ***
 
 # 2. Overall Description 
 ## Product Perspective
-Campus Facility Booking Application will be a platform where Professors will be able to book classrooms, students will be able to book lab equipment for their usage and they can also book tennis, volleyball and basketball courts. All this will be provided by the app.
+From a product perspective, the website can be viewed as an online platform that provides users with a variety of tools and features to create, share, and discover content with others in a community-driven environment. The platform allows users to vote on content submissions, with higher-ranked content appearing more prominently on the site.
 
 ## Product Features
 Following Features will be provided by our Product:-
+- The platform is organized into communities dedicated to specific topics. Users can subscribe to any community they like and participate in discussions.
+- Users can post a wide range of content, including links, images and text posts.
+- It has a voting system that allows users to upvote or downvote content based on their opinion of it. 
+- Users can comment on posts and engage in discussions with other users. 
+- Users can search for specific content, communities, or users using the search function.
+- Users can create profiles and customize them with a profile picture.
 
-* Users will be able to log in to the app and book the relevant classes,lab equipment and play fields.
-* Users will be able to see their upcoming booked classes and all their past booked classes.
-* A preference order will be maintained where Bookings made by Professors will be given higher priority followed by students and club representatives.
-* A web based Admin Portal will be implemented where Admin will be able to add new classrooms,lab equipment etc. to the database and can do things related to the database.
-* Booking will be done after taking inputs like, number of students attending, so that the classrooms having that strength can be given to the user for booking.
-* A complaint portal will also be there where any issues can be registered and which will be looked upon by the admin.
-* Students will be able to mark his/her attendance via location based system.
-
-## User Classes & Characteristics
+## User Classes & Characteristics (not edited from here)
 ### Physical Actors → 
 *Professors* :- All the professors can book classrooms for taking classes, organizing seminars and talks.
 
