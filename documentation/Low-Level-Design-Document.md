@@ -24,7 +24,7 @@ Below are the detailed description of the modules of our application discussed i
 
 - **Search Module** - This Module will handle searching among the posts, users and communities according to title of the post, username, community name, tags, and other factors. The module will retrieve information from the database for each query.
 
-<img src="images/interface3.jpeg"></img>
+      <img src="images/interface4.jpeg"></img>
 
 - **Posts Module** - This Module will be used for the new and existing posts, and the comments on those posts.
 
