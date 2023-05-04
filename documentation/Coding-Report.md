@@ -1,404 +1,201 @@
 ## Table Of Contents
-- [Login Module](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#1-login-module)
-- [SignUp Module](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#2-signup-module)
-- [Dashboard](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#3-dashboard)
-- [Booking Module](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#4-booking-module)
-     - [Book Classroom](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#41-book-classroom)
-     - [Book Lab](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#42-book-lab)
-     - [Book Sport](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#43-book-sport)
-- [User Bookings](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#5-user-bookings)
-- [User Profile](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#6-user-profile)
-- [Logout](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/Coding-Report-%231#7-logout)
+- [Login Module](#1-login-module)
+- [SignUp Module](#2-signup-module)
+- [Home Page](#3-home-page)
+- [Communities Module](#4-communities-module)
+     - [Create a Community](#41-create-a-community)
+- [Posts Module](#5-comments-module)
+- [Comments Module](#6-comments-module)
+- [User Profile](#7-user-profile)
+- [Logout](#8-logout)
 
-***
-
-# MAIN FEATURES
+# Main Features
 ## 1. LOGIN MODULE
-### • Problem Statement
 
-Develop an activity & interface that allows the users to login to the system via credentials used during signup. This will guide the user to the application home page. 
+A component that allows users to log in to the website by verifying their identity. It is a part of the authentication process that requires users to enter their username and password to gain access to the platform.
+
+
+The login module works by verifying the user's credentials against a database or directory of authorized users. If the user's credentials are correct, the login module grants access to the system or website, and the user is given appropriate permissions and privileges based on their role or level of access.
 
 ### • Structure Chart
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/login_struct.png" height= "500" width="700" ></img>
+<!-- <img src="" ></img> -->
 
 ### • Implementation
 |     |     |
 | --- | --- |
-Parameters | N/A
 Input | Email and password
 Output | Valid user - guided to application homepage / Invalid credentials - error
 
-- PseudoCode 
-
+### • PseudoCode 
 
 ```kotlin
-Login(email,password):
-      auth = Firebase.getInstance()       //FirebaseAuth used for authentication 
-      if(auth.signInWithEmailAndPassword(email,password) is successful):
-            //userUtils will be stored globally
-            userUtils = database.collection("Users").whereEqualto("email",email).get()
-            //The user is taken to HomePageActivity
-      
-      else:
-           print("Error")
+Login Check Code
 ```
-
 ### • Login UI
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/Login_UI.jpg" height= "500" width="250" ></img>
-
-***
+<img src="images/login.png"></img>
 
 ## 2. SIGNUP MODULE
-### • Problem Statement
 
-Develop an activity & interface where users can SignUp to access the app by filling out the required fields followed by mobile verification via OTP. Only after Successful registration, the user should be able to login and use the app.
+A component that allows users to create a new account on the platform. It is a part of the user registration process that requires users to provide their personal information to create a new account.
+
+It includes a form that collects the user's information, such as their name, email address, password, and other relevant details. If the user's information is valid, the signup module creates a new account for the user. The user can then log in to the website using their new account credentials.
 
 ### • Structure Chart
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/signup_struct.png" height= "500" width="700" ></img>
+<!-- <img src="" ></img> -->
 
 ### • Implementation
 |     |     |
 | --- | --- |
-Parameters | N/A
-Input | Email , name, mobile number , password and confirm password
+Input | Email, name, password, gender and profile picture
 Output | Successfully Registered / Error in Registration
 
 
-- PseudoCode 
+### • PseudoCode 
 ```kotlin
-SignUp(email,password,confirmPassword,name,mobile):
-      auth = Firebase.getInstance()       //FirebaseAuth used for authentication
-      if(any field is empty):
-         print("This Field is Compulsory")
-         return
-      if(password != confirmPassword):
-         print("Passwords do not match")
-         return 
-      if(mobile.isVerified()):
-            //constructor called for User Class
-            if(auth.createUserWithEmailAndPassword(email,password) is successful):
-                   user = new User(id,name,mobile,email)  //id randomly generated by firebase
-                   database.collection("Users").document(id).save(user)
-      
-      else:
-           send OTP for mobile Verification
+Signup Code
 ```
-
 
 
 ### • SignUp UI
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/Register_UI.jpg" height= "500" width="250" ></img>
-***
+<img src="images/signup.png"  ></img>
 
-## 3. DASHBOARD
-### • Problem Statement
+## 3. HOME PAGE
 
-Develop an activity & interface to provide users easy navigation to prior functionalities of the app. The main goal is to achieve dashboard screen layout and provide navigation to related screens on selecting appropriate icons/cards on the dashboard.
+Once the user has logged in to Reddit, they will be directed to the Reddit home page. The home page is customized based on the interests of the userand activity on the platform. 
+
+The user can access their profile and account settings from home page. The home page will show posts from the communities they have subscribed to based on their interests.
 
 ### • Structure Chart
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/dashboard_struct.png" height= "500" width="700" ></img>
+<!-- <img src="" ></img> -->
 
-### • Implementation
-
-- PseudoCode 
+### • PseudoCode 
 ```kotlin
-Dashboard(event):
-      auth = Firebase.getInstance()
-      currentUser = auth.currentUser
-
-      if(currentUser==null):
-           startActivity(LoginActivity)
-
-      classBooking.onClickListener(startActivity(ClassRoomBookingActivity))
-
-      labBooking.onClickListener(startActivity(LabBookingActivity))
-
-      sportBooking.onClickListener(startActivity(SportsBookingActivity))
-
-      viewBooking.onClickListener(startActivity(ViewBookingHistoryActivity))
-
-      editProfile.onClickListener(startActivity(ProfileActivity))
-
+Required Code
 ```
 
 
+### • Home Page UI
 
-### • Dashboard UI
+<img src="" ></img>
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/Dashboard_UI.jpg" height= "500" width="250" ></img>
-***
+## 4. COMMUNITIES MODULE
 
-## 4. BOOKING MODULE
-### • Problem Statement
+A community is a group of users who share a common interest or topic. Communities can be created by any user on the platform, and they can be focused on a wide range of topics. Within a community, users can submit posts, comments, and links related to the community's topic, as well as engage in discussions and interact with other members of the community.
 
-Develop a global booking function to facilitate booking of all types of facilities. 
-Note that this function is called in all the booking facilities features separately so input and output in details have been provided in respective booking sections.
-### • Implementation
-
-- PseudoCode
-
+### • PseudoCode
 
 ```kotlin
-BookFacilityByNameAndDate(date,facilityName):
-      userUtils = database.getCurrentUser()
-      slots = []    //Stored as a Pair of slot and status
-      slots = SearchFacility(date,facilityName)
-      if(slots.isEmpty() == false):
-          selectedslot = slots[i](Choose One From slots //Given in UI)
-          if(selectedSlot.status == "booked"):
-              print("Already Booked. Choose Another Slot")
-              selectedSlot = "" 
-          elseif(selectedSlot.status == "acadSlots"):
-              print("This Slot is for Academic Purpose. Choose Another Slot")
-              selectedSlot = ""
-          elseif(selectedSlot.status == "available"):
-              selectedSlot = slots[i]
-
-          if(selectedSlot != ""):
-              //Constructor For Class Booking Records
-              bookingRecord = new BookingRecords(date,classRoom,userUtils,selectedSlot)
-              database.collection("BookingRecords").document().save(bookingRecord)
-
-SearchFacility(date,facilityName):
-      slots = []     //Stored as a pair of slot and status
-      documents = database.collection("date").document("facilityName").get()
-      for(document in document):
-           slots.add(document)
-      
-      return slots 
+Code
 ```
+
+
 ## Submodules
-### 4.1 BOOK CLASSROOM
-#### • Problem Statement
-Develop an activity & interface to automate the process of slot to slot booking of classrooms by faculties and students on priority basis.
+### 4.1 Create a Community
+
 #### • Structure Chart
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/classroom_booking.png"></img>
+<!-- <img src=""></img> -->
+
 #### • Implementation
-
-##### 4.1.1 Book Classroom by date and name
-###### View All Slots
 |     |     |
 | --- | --- |
-Input | Date , Name of Class
-Output | Available slots for this class for this date
-###### Book Room
-|     |     |
-| --- | --- |
-Input | Selected Slot
-Output | Room Successfully Booked
+Input | 
+Output | 
 
-- PseudoCode
+#### • PseudoCode
 
 ```kotlin
-BookByClassRoomAndDate(date,classRoom):
-      BookFacilityByNameAndDate(date,classRoom)  //Function globally called above
+Code
 ```
 
-##### 4.1.2 Book Classroom by capacity
-###### View All ClassRooms
-|     |     |
-| --- | --- |
-Input | Capacity
-Output | Available Classes for that capacity
-###### View All Slots
-|     |     |
-| --- | --- |
-Input | Date , Name of Class
-Output | Available slots for this class for this date
+#### • Create a Community UI
 
-###### Book Room
-|     |     |
-| --- | --- |
-Input | Selected Slot
-Output | Room Successfully Booked
-
-- PseudoCode
-
-```kotlin
-BookByCapacity(capacity):
-      userUtils = database.getCurrentUser()
-      classRooms = []
-      classRooms = SearchCapacity(capacity)
-      if(classRooms.isEmpty() == false):
-          selectedclassRoom = classRoom[i](Choose One From slots //Given in UI)
-          date = Choose Date from DatePicker
-          BookFacilityByNameAndDate(date,selectedclassRoom)
-
-```
-```kotlin
-SearchCapacity(capacity):
-     classRooms = []
-     documents = database.collection("ClassRooms").whereEqualTo("capacity",capacity).get()
-     for(document in document):
-           classRooms.add(document)
-     return classRooms
-
-
-```
-### • Book ClassRoom UI
-
-<p><img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/SearchClassByName_UI.jpg" height="500" width="250"></img>
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/SearchByCapacity_UI.jpg" height="500" width="250"></img></p>
+<img src="images/createCommunity.png" ></img>
 
 
 
-### 4.2 BOOK LAB
-#### • Problem Statement
-Develop an activity & interface to automate the process of slot to slot booking of labs by faculties and students on priority basis.
-#### • Structure Chart
+## 5. POSTS MODULE
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/BookLab.png" height= "500" width="700" ></img>
-#### • Implementation
-
-##### Book Lab by date and name
-###### View All Slots
-|     |     |
-| --- | --- |
-Input | Date , Name of Lab
-Output | Available slots for this lab for this date
-###### Book Lab
-|     |     |
-| --- | --- |
-Input | Selected Slot
-Output | Lab Successfully Booked
-
-- PseudoCode
-
-```kotlin
-BookByLabNameAndDate(date,labName):
-      BookFacilityByNameAndDate(date,labName)
-```
-### • Book Lab UI
-
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/SearchLabByName_UI.jpg" height="500" width="250"></img>
-
-
-### 4.3 BOOK SPORT
-#### • Problem Statement
-Develop an activity & interface to automate the process of slot to slot booking of Sports by faculties and students on priority basis.
-#### • Structure Chart
-
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/BookSports.png" height= "500" width="700" ></img>
-#### • Implementation
-
-##### Book Sport by date and name
-###### View All Slots
-|     |     |
-| --- | --- |
-Input | Date , Name of Sports Complex
-Output | Available slots for this Complex for this date
-###### Book sports Complex
-|     |     |
-| --- | --- |
-Input | Selected Slot
-Output | Sports Complex Successfully Booked
-
-- PseudoCode
-
-```kotlin
-BookBySportComplexNameAndDate(date,sportComplexName):
-      BookFacilityByNameAndDate(date,sportComplexName)
-```
-
-### • Book Sports UI
-
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/SearchSportsByName_UI.jpg" height="500" width="250"></img>
-
-***
-
-### • Slots and Confirm Booking UI
-
-<p><img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/BookingHistory.jpeg" height="500" width="250"></img>
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/ConfirmBooking.jpeg" height="500" width="250"></img></p>
-
-***
-
-
-## 5. USER BOOKINGS
-### • Problem Statement
-
-Develop an interface to show all the past,present and future bookings made by the current Logged In User along with real time situation.
-### • Structure Chart
-
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/booking_history.png" height= "500" width="700" ></img>
-
-### • Implementation
-|     |     |
-| --- | --- |
-Input | User Utils
-Output | All Bookings
-- PseudoCode 
-```kotlin
-ViewBookingHistory(userUtils):
-      bookingRecords = []
-      document = database.collections("BookingRecords").whereEqualto("userUtils",userUtils).get()
-      for(document in document):
-           bookingRecords.add(document)
-      bookingRecords.sortbyDescending(date)
-      currentTime = Time.now()
-      currentDate = Date.now()
-      for(bookingRecord in bookingRecords):
-           bookingRecord.status = "completed"
-           if(bookingRecord.date == currentDate):
-              if(bookingRecord.slot.startTime <= currentTime and bookingRecord.slot.endTime >= currentTime):
-                   bookingRecord.status = "Ongoing"
-              elseif(bookingRecord.slot.startTime > currentTime ):
-                   bookingRecord.status = "upcoming"
-           elseif(bookingRecord.date > currentDate):
-              bookingRecord.status = "upcoming"
- 
-      return bookingRecords
-```
-### • UserBookings UI
-
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/Slots.jpeg" height= "500" width="250" ></img>
-***
-
-## 6. USER PROFILE
-### • Problem Statement
-
-Develop an activity & interface to display user-specific settings and information.
+Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
 
 ### • Structure Chart
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/StructCharts/user_profile.png" height= "500" width="700" ></img>
+<!-- <img src="" height= "500" width="700" ></img> -->
 
-### • Implementation
+## Submodules
+
+### • Create a Post
+#### • Implementation
+
 |     |     |
 | --- | --- |
-Input | User Utils
-Output | User Profile
+Input | 
+Output | 
+
+#### • PseudoCode 
+```kotlin
+Code
+```
+### • Create a Post UI
+
+<img src="" ></img>
+
+***
+
+## 6. COMMENTS MODULE
+
+Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
+
+### • Structure Chart
+
+<!-- <img src="" height= "500" width="700" ></img> -->
+
+## Submodules
+
+### • Post a Comment
+#### • Implementation
+
+|     |     |
+| --- | --- |
+Input | 
+Output | 
+
+#### • PseudoCode 
+```kotlin
+Code
+```
+
+***
+
+## 7. USER PROFILE
+
+A user profile is a public page that displays information about a user's activity and contributions on the platform. When a user create a Reddit account, they automatically get a profile page that can be customized to reflect their interests, personality, and contributions to the community.
+
+### • Structure Chart
+
+<!-- <img src="" ></img> -->
+
+### • Implementation
+
 - PseudoCode 
 ```kotlin
-ViewUserProfile(userUtils):
-      document = database.collections("Users").whereEqualto("userUtils",userUtils).get()
-      userDetails = document
-      return userDetails 
+Code
 ```
 ### • UserProfle UI
 
-<img src="https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/blob/main/Static%20Files/CodingReview1Assets/UI/Profile_UI.jpg" height= "500" width="250" ></img>
+<img src="" ></img>
 ***
 
-## 7. LOGOUT
-### • Problem Statement
+## 8. LOGOUT
+
 Add option for logged in users to logout from the system.
 
-### • Implementation
-|     |     |
-| --- | --- |
-Input | User Auth
-Output | SignOut
-- PseudoCode          
+### • PseudoCode          
 ```kotlin
-Logout():
-      auth = Firebase.getInstance()
-      auth.signOut()
-      return
+Code
 ```
