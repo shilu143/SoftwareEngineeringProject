@@ -52,11 +52,11 @@ This is a social aggregation, discussion, and community-driven platform which pr
 ***
 
 ## 4. Software Documents
-- [Software Requirement Specifications](./Documentation/SRS-Document.md)
-- [High Level Design Document](./Documentation/High-Level-Design-Document.md)
-- [Low Level Design Document](./Documentation/Low-Level-Design-Document.md)
-- [Coding Report #1](./Documentation/Coding-Report.md)
-- [Test Plan Document](./Documentation/Test-Plan-Document.md)
+- [Software Requirement Specifications](./documentation/SRS-Document.md)
+- [High Level Design Document](./documentation/High-Level-Design-Document.md)
+- [Low Level Design Document](./documentation/Low-Level-Design-Document.md)
+- [Coding Report #1](./documentation/Coding-Report.md)
+- [Test Plan Document](./documentation/Test-Plan-Document.md)
 
 ***
 
