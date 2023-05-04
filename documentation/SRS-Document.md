@@ -64,88 +64,85 @@ Following Features will be provided by our Product:-
 - Database : 
 - Authetication :  
 ***
-# 5. Features & Requirements (not edited this section)
+# 5. Features & Requirements
 
 ## System/hardware features
 
-### User Registration : REQ1
+### 1. User Registration
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
 To use the system, user first registers in the site by filling a simple form, the link of 
 which is provided in the home page. 
-<b>PRIORITY</b>: High
+    <b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: User in homepage, clicked ‘register’
+    <b>PRECONDITION</b>: User in homepage, clicked ‘Sign Up’
 1. User fills the form and submit
 2. Form validation checks to be passed for successful registration
-3. The registration request will be approved by the Admin
-4. As admin approves request the user gets registered and his account gets activated
-5. User redirected to booking portal
-<b>POST CONDITION</b>: The user get its account interface
+    <b>POST CONDITION</b>: The user get their account registered
 </pre>
 
-### User Login : REQ2
+### 2. User Login
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
-The user login in the login window provided in the homepage or through the login navigation link 
-in the homepage to access CFB.
-<b>PRIORITY</b>: High
+The user login in the login window provided in the homepage.
+    <b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: None
+    <b>PRECONDITION</b>: User in homepage, clicked ‘Log In’
 1. User fill login form and submit it
-2. User login credentials are validated from firebase auth
+2. User login credentials are validated
 3. If login info is not correct or all fields are not filled, submission fails and resubmission is required
-4. If successfully submitted redirect to booking portal
-<b>POST CONDITION</b>: The user get logged in
+4. If successfully submitted redirect to dashboard
+    <b>POST CONDITION</b>: The user get logged in
 </pre>
 
-### Search Engine : REQ3
+### 3. Search Feature
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
-User can search for rooms by Name, room capacity, availability & search for other facilities.
-<b>PRIORITY</b>: Medium
+User can search for the posts and communities
+    <b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: User logged in the account
-1. User opt to search for campus facilities to book
+    <b>PRECONDITION</b>: User logged in the account
+1. User opt to search for something
 2. Typing search query provides available options from database
-<b>POST CONDITION</b>: user gets the required list of search query
+    <b>POST CONDITION</b>: user gets the required list of search query
 </pre>
 
-### Booking Facility : REQ4
+### 4. Comment on a Post
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
-After clicking to any search result, user gets directed to that facility booking window
-<b>PRIORITY</b>: High
+The user wants to comment an exiting post
+    <b>PRIORITY</b>: High
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: User in booking window
-1. User selects the time & date and clicks on book button
-2. The booking request gets added to the pending queue
-3. Pending requests gets resolved through pre-defined priorities
-<b>POST CONDITION</b>: user gets the facility booked (if approved)
+    <b>PRECONDITION</b>: User is logged in
+1. User click on the post
+2. He types the comment and presses enter
+    <b>POST CONDITION</b>: The comment is visible to everyone
 </pre>
 
-### Location based Attendance System : REQ5
+### 5. Create a Community
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
-User can mark his/her attendance based on location
-<b>PRIORITY</b>: Medium
+    User can create a community
+    <b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: User in attendance window and GPS enabled on phone
-1. User selects the class and clicks on mark attendance button
-2. Location of the class and his/her mobile location will be verified
-<b>POST CONDITION</b>: user attendance gets marked (if verified)
+    <b>PRECONDITION</b>: User is logged in
+1. User clicks on the 'Create a Community' Button
+2. User fills out the form
+3. Confirms the details
+    <b>POST CONDITION</b>: A new community is created
 </pre>
 
-### Web based admin portal : REQ6
+### 5. Create a Post
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
-Admin can view and alter booking data and details.
-<b>PRIORITY</b>: High
+    User can create a post
+    <b>PRIORITY</b>: Medium
 • <b>STIMULUS & RESPONSE</b>
-<b>PRECONDITION</b>: Admin logged into the web portal
-1. Admin add/update/delete rooms and other facilities in database
-2. Admin can view all bookings made
-<b>POST CONDITION</b>: Database altered
+    <b>PRECONDITION</b>: User is logged in
+1. User clicks on the 'Create new post' Button
+2. User makes a post
+3. Confirms the details
+    <b>POST CONDITION</b>: A new post is created
 </pre>
 
 No specific hardware features and requirements.
