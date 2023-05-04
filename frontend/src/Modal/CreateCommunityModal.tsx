@@ -25,7 +25,8 @@ import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { BsPatchCheckFill, BsPatchExclamationFill } from 'react-icons/bs'
 import { AvatarWithFileManager } from '../components/FileUploader'
-import { AuthContext, useAuth } from '../hooks/useAuth'
+import Cookies from 'js-cookie'
+// import { AuthContext, useAuth } from '../hooks/useAuth'
 
 interface Props {
   open: boolean
@@ -41,7 +42,8 @@ const CreateCommunityModal: React.FC<Props> = ({ open, handleClose }) => {
   const [tags, setTags] = useState<string[]>([])
   const [tagInput, setTagInput] = useState('')
   const [tagError, setTagError] = useState(false)
-  const userToken = useContext(AuthContext)
+  // const userToken = useContext(AuthContext)
+  const userToken = Cookies.get('AuthToken')
   const toast = useToast()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
