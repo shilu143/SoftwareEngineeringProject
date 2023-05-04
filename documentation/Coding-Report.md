@@ -7,7 +7,6 @@
 - [Posts Module](#5-comments-module)
 - [Comments Module](#6-comments-module)
 - [User Profile](#7-user-profile)
-- [Logout](#8-logout)
 
 # Main Features
 ## 1. LOGIN MODULE
@@ -30,7 +29,32 @@ Output | Valid user - guided to application homepage / Invalid credentials - err
 ### • PseudoCode 
 
 ```kotlin
-Login Check Code
+const handleLogin = async () => {
+    const response = await axios
+          ...;
+        },
+      })
+      .catch((error) => {
+          ...;
+        })
+      })
+
+    if (response && response.status === 200) {
+      toast({
+        ...;
+      })
+
+      setUser({
+        ...;
+      })
+      Cookies.set('email', response.data.userEmail)
+      Cookies.set('authToken', response.data.auth)
+      Cookies.set('profileImage', response.data.profileImage)
+
+      resetState()
+      handleClose()
+    }
+  }
 ```
 ### • Login UI
 
@@ -55,7 +79,21 @@ Output | Successfully Registered / Error in Registration
 
 ### • PseudoCode 
 ```kotlin
-Signup Code
+const handleSignUp = async () => {
+    formData['profile'] = selectedFile as File
+    const response = await axios.post('/userSignUp', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    console.log(response.data)
+    toast({
+      ...;
+    })
+    resetState()
+    handleClose()
+  }
+
 ```
 
 
@@ -69,63 +107,61 @@ Once the user has logged in to Reddit, they will be directed to the Reddit home 
 
 The user can access their profile and account settings from home page. The home page will show posts from the communities they have subscribed to based on their interests.
 
-### • Structure Chart
-
-<!-- <img src="" ></img> -->
-
-### • PseudoCode 
-```kotlin
-Required Code
-```
-
 
 ### • Home Page UI
 
-<img src="" ></img>
+<img src="images/home.jpeg" ></img>
 
 ## 4. COMMUNITIES MODULE
 
 A community is a group of users who share a common interest or topic. Communities can be created by any user on the platform, and they can be focused on a wide range of topics. Within a community, users can submit posts, comments, and links related to the community's topic, as well as engage in discussions and interact with other members of the community.
 
-### • PseudoCode
-
-```kotlin
-Code
-```
-
 
 ## Submodules
 ### 4.1 Create a Community
 
-#### • Structure Chart
-
-<!-- <img src=""></img> -->
-
 #### • Implementation
 |     |     |
 | --- | --- |
-Input | 
-Output | 
+Input | Community Name and Details
+Output | A new community created
 
 #### • PseudoCode
 
 ```kotlin
-Code
+const handleCreateCommunity = async () => {
+    const formData = new FormData()
+    ...;
+    const headers = { Authorization: `Bearer ${user?.token}` }
+    axios
+      .post('/insertCommunityInDatabase', formData, { headers })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.status)
+          toast({
+               ...;
+          })
+        } else if (response.status === 500) {
+          ...;
+          })
+        }
+      })
+      .catch((error) => {
+        ...;
+        })
+      })
+    resetState()
+    handleClose()
+  }
 ```
 
 #### • Create a Community UI
 
-<img src="images/createCommunity.png" ></img>
-
-
+<img src="images/createCommunity.jpeg" ></img>
 
 ## 5. POSTS MODULE
 
 Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
-
-### • Structure Chart
-
-<!-- <img src="" height= "500" width="700" ></img> -->
 
 ## Submodules
 
@@ -134,26 +170,18 @@ Posts are submissions of content that can be upvoted, downvoted, and commented o
 
 |     |     |
 | --- | --- |
-Input | 
-Output | 
+Input | Post Details, Image and Title
+Output | A new post is created
 
-#### • PseudoCode 
-```kotlin
-Code
-```
-### • Create a Post UI
+### • Post UI
 
-<img src="" ></img>
+<img src="images/post.jpeg" ></img>
 
 ***
 
 ## 6. COMMENTS MODULE
 
 Posts are submissions of content that can be upvoted, downvoted, and commented on by other users. Posts can take many forms, including links to articles, text posts, and images.
-
-### • Structure Chart
-
-<!-- <img src="" height= "500" width="700" ></img> -->
 
 ## Submodules
 
@@ -162,13 +190,12 @@ Posts are submissions of content that can be upvoted, downvoted, and commented o
 
 |     |     |
 | --- | --- |
-Input | 
-Output | 
+Input | The entire comment
+Output | The comment is posted on the required post
 
-#### • PseudoCode 
-```kotlin
-Code
-```
+### • Comment UI
+
+<img src="images/comment.jpeg" ></img>
 
 ***
 
@@ -176,26 +203,9 @@ Code
 
 A user profile is a public page that displays information about a user's activity and contributions on the platform. When a user create a Reddit account, they automatically get a profile page that can be customized to reflect their interests, personality, and contributions to the community.
 
-### • Structure Chart
-
-<!-- <img src="" ></img> -->
-
-### • Implementation
-
-- PseudoCode 
-```kotlin
-Code
-```
 ### • UserProfle UI
 
-<img src="" ></img>
+<img src="images/userProfile.jpeg" ></img>
+
+<img src="images/userProfile2.jpeg" ></img>
 ***
-
-## 8. LOGOUT
-
-Add option for logged in users to logout from the system.
-
-### • PseudoCode          
-```kotlin
-Code
-```
