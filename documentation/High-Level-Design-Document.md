@@ -1,8 +1,7 @@
 ## Table Of Contents
 - [Introduction](#1-introduction)
     - [Scope](#11-scope)
-    - [Definitions](#12-definitions)
-    - [Overview](#13-overview)
+    - [Overview](#12-overview)
 
 - [General Description](#2general-description)
     - [Product Perspective](#21-product-perspective)
@@ -30,53 +29,56 @@ The purpose of this HLD document is to provide a conceptual understanding of the
 The main purpose is to communicate the system's architecture and design to stakeholders, and other members of the project team. This document serves as a blueprint for the system, outlining its key features, functions, and interactions between different components.
 
 ## 1.1 Scope
-The HLD documentation presents the structure of the project , such as the database architecture, application architecture (layers), application flow (Navigation), and technology architecture.
+- System architecture: It provides an overview of the system architecture, including the high-level components, their interactions, and how they work together to achieve the system's goals.
+- Functional requirements: It describes the high-level functional requirements of the system, including the features and capabilities that the system must provide.
+- Data design: It describes how data will be stored and managed within the system, including data structures, databases, and any relevant data management processes.
+- Assumptions and constraints: It includes any assumptions or constraints that may impact the design or implementation of the system.
 
-## 1.2 Definitions
-- ER  : Entity Relation Diagram
-- Admin : user with administrator privileges
-- Client : Intended Users of the application
-- HLD - High level design
-- LLD - Low level design
-
-## 1.3 Overview
+## 1.2 Overview
 The HLD will :-
 - Showcase all the high-level design aspects
 - Describe the user interface being implemented 
 - Describe the hardware and software interfaces
-- Describe the performance requirements
 - Include design features and the architecture of the project
 - List and describe the non-functional attributes 
 
 ***
 
 # 2.General Description
-## 2.1 Product Perspective
 
+## 2.1 Product Perspective
+From a product perspective, the website can be viewed as an online platform that provides users with a variety of tools and features to create, share, and discover content with others in a community-driven environment. The platform allows users to vote on content submissions, with higher-ranked content appearing more prominently on the site.
+
+It also features a variety of communities, or subreddits, that are focused on specific topics or interests. Users can join these communitites to discuss, share, and discover content related to those topics.
+
+From a product perspective, some of the key features and tools that Reddit provides to users include:
+- Posting and commenting: Users can create and submit content to the site, and engage in discussions through comments on content submitted by others.
+- Voting: Users can upvote or downvote content to indicate their approval or disapproval, and higher-ranked content appears more prominently on the site.
+- Communities: Users can join communities focused on specific topics or interests, and engage in discussions and content sharing related to those topics.
+
+Overall, the product's perspective is focused on providing a platform for users to share and discover content, engage in discussions, and connect with others who share their interests. The platform's features and tools are designed to facilitate this community-driven approach to content sharing and discussion.
 
 ## 2.2 Tools Used
-- Lucid Chart : Lucidchart is a web-based proprietary platform that allows users to collaborate on drawing, revising and sharing charts and diagrams. 
-- Android Studio-Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ 
-  IDEA software and designed specifically for Android development.
-- NodeJS Server : An open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
-- Web-based admin portal : Frontend [HTML, CSS, JavaScript] , Backend [NodeJS]
-- Firebase & Google cloud store Database : Firebase is a platform developed by Google for creating mobile and web applications.
-- Geolocation API used for Location based attendance system :The Geolocation API allows the user to provide their location to web applications 
-- Kotlin- Used for backend development. Kotlin is a cross-platform, statically typed, general-purpose programming language with type inference.
-- XML-Used as front end development. Extensible Markup Language is a markup language that defines a set of rules for encoding documents.
+- ReactJS: A popular open-source JavaScript library used for building user interfaces for web applications.
+- NodeJS Server: An open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
+- More
+- More
+- More
+- More
+- More
 
 ## 2.3 General Constraints
-This application is provisioned to be built using Kotlin along with a web based admin to be built using HTML,CSS,JS & NodeJS. Also Firestore for proper data management is adopted for efficient performance and less redundancy in data. UI layout will be designed in XML.
+    To Be Written
 
 ## 2.4 Assumptions 
-Refer [SRS section](https://github.com/CS305-software-Engineering/App-for-campus-facility-booking/wiki/SRS-Document#7-implementation-details)
+Refer [SRS section](./SRS-Document.md#7-implementation-details)
 
 ## 2.5 Special Design Aspects
 This application requires internet access for its overall functionality so as to make HTTPS requests to database server and perform methods. 
 
 ***
 
-# 3. Design Details
+# 3. Design Details (not edited from here on)
 
 ## 3.1 Main Design Features
 The main design features include five major parts: application architecture, technology architecture, interfaces, deployment architecture, the database design and use case. In order to make these designs easier to understand, the design has been illustrated using diagrams.
@@ -161,7 +163,3 @@ le to make it easy for debugging , performance improvement and adaptation to cha
 
 
 ***
-
-# 4. References
-* [https://people.ok.ubc.ca/rlawrenc/research/Students/CJ_05_Design.pdf](https://people.ok.ubc.ca/rlawrenc/research/Students/CJ_05_Design.pdf)
-* [https://en.wikipedia.org/wiki/High-level_design](https://en.wikipedia.org/wiki/High-level_design)
