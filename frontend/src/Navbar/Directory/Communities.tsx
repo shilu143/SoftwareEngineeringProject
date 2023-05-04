@@ -6,8 +6,10 @@ import { Box, Text } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react'
 import CreateCommunityModal from '../../Modal/CreateCommunityModal'
 import MenuListItems from './MenuListItems'
-import { AuthContext } from '../../hooks/useAuth'
+// import { AuthContext } from '../../hooks/useAuth'
 import axios from 'axios'
+import Cookies from 'js-cookie'
+import { AuthContext } from '../../context/AuthContext'
 
 interface Community {
   comid: number
@@ -20,17 +22,27 @@ interface Community {
 const Communities: React.FC = () => {
   const [open, setOpen] = useState(false)
   const [communities, setCommunities] = useState<Community[]>([])
-  const userToken = useContext(AuthContext)
-  console.log(userToken)
+  const { user, setUser } = useContext(AuthContext)
+  // const [userToken]
+  // const userToken = useContext(AuthContext)
+  const [userToken, setUserToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    const token = Cookies.get('authToken')
+    setUserToken(token ? token : '')
+  }, [user])
+
   useEffect(() => {
     handleChange()
   }, [userToken])
 
   const handleChange = async () => {
-    const headers = { Authorization: `Bearer ${userToken}` } // Add the token to the headers
+    const headers = { Authorization: `Bearer ${userToken}` }
     const response = await axios.get('/fetchCommunities', { headers })
     setCommunities(response.data)
   }
+
+  // handleChange()
 
   return (
     <div>

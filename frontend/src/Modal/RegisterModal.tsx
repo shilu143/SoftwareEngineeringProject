@@ -35,7 +35,7 @@ import axios from 'axios'
 import React, { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { AvatarWithFileManager } from '../components/FileUploader'
 import PasswordInput from '../components/PasswordInput'
-import { AuthContext } from '../hooks/useAuth'
+// import { AuthContext } from '../hooks/useAuth'
 
 interface Props {
   open: boolean
@@ -61,14 +61,6 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
 
   const handleSignUp = async () => {
     formData['profile'] = selectedFile as File
-    // const fd = new FormData()
-    // fd.append('profile', selectedFile as File)
-    // fd.append('name', formData.name)
-    // fd.append('age', formData.age.toString())
-    // fd.append('email', formData.email)
-    // fd.append('gender', formData.gender)
-    // fd.append('password', formData.password)
-
     const response = await axios.post('/userSignUp', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -82,11 +74,19 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
       duration: 5000,
       isClosable: true,
     })
+    resetState()
     handleClose()
   }
 
   const resetState = () => {
-    setSelectedFile(null)
+    setFormData({
+      name: '',
+      gender: '',
+      age: 10,
+      password: '',
+      email: '',
+      profile: null,
+    })
   }
 
   const [formData, setFormData] = useState<FormData>({
@@ -216,7 +216,7 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
                     </NumberInputStepper>
                   </NumberInput>
                 </Flex>
-                <Flex flexDir={'column'} mb={3}>
+                {/* <Flex flexDir={'column'} mb={3}>
                   <FormLabel fontWeight={600} fontSize={15}>
                     OTP
                   </FormLabel>
@@ -228,7 +228,7 @@ const RegisterModal: React.FC<Props> = ({ open, handleClose }) => {
                       <PinInputField />
                     </PinInput>
                   </HStack>
-                </Flex>
+                </Flex> */}
                 <Flex flexDir={'column'} mb={3}>
                   <FormLabel fontWeight={600} fontSize={15}>
                     Password

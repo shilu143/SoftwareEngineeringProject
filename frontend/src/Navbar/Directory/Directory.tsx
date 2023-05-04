@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
 import React, { useContext, useEffect, useState } from 'react'
 import { TiHome } from 'react-icons/ti'
 import Communities from './Communities'
-import { AuthContext } from '../../hooks/useAuth'
+// import { AuthContext } from '../../hooks/useAuth'
 import axios from 'axios'
 interface Community {
   comid: number

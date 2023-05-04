@@ -65,7 +65,7 @@ app.post("/loginCheck", async (req, res) => {
 	const email = req.body.email,
 		password = req.body.password;
 	console.log(req.body);
-	var query = `select count(*) from users where email='${email}' and password='${password}'`;
+	var query = `select profileimage, count(*) from users where email='${email}' and password='${password}' group by users.profileimage`;
 	console.log(query);
 	client.query(query, (error, results) => {
 		if (error) {
@@ -74,6 +74,7 @@ app.post("/loginCheck", async (req, res) => {
 			res.status(500).send("Error! Try again");
 		} else {
 			const ct = results.rows[0].count;
+			const profileImage = results.rows[0].profileimage;
 			console.log("dasdf", ct);
 			if (ct == 1) {
 				jwt.sign(
@@ -82,14 +83,20 @@ app.post("/loginCheck", async (req, res) => {
 					{ expiresIn: "24h" },
 					(err, token) => {
 						if (err) {
-							res.status(404, { result: "Session Timeout" });
+							res.status(401).send({ result: "Session Timeout" });
 						} else {
-							res.send({ userEmail: email, auth: token });
+							res.send({
+								userEmail: email,
+								auth: token,
+								profileImage: profileImage,
+							});
 						}
 					}
 				);
 			} else {
-				res.status(200).json("Invalid user name or password");
+				res.status(401).send({
+					result: "Invalid Username or Password",
+				});
 			}
 		}
 	});
