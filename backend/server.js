@@ -207,13 +207,23 @@ app.get("/returnDetailsOfAPost", verifyToken, async (req, res) => {
 		"select * from posts where postId=$1",
 		[postId]
 	);
+
+	/*find name of the creator of the post*/
+	let creatorName = await client.query("select u.name  from users u,posts p where p.postId=$1 and p.createdByWhom=u.id",
+		[postId]);
+	console.log(creatorName.rows[0].name);
+	// const name = creatorName.rows[0].name;
 	// console.log(communityId);
+	// console.log(creatorName)
+	let name = creatorName.rows[0].name;
 	const result = communityId.rows.map((row) => ({
 		...row,
 		commentCount: commentCount.rows[0].count,
+		creatorName: name,		
 		commentRows: commentRows.rows,
 	}));
 	// console.log(result);
+	
 	res.status(200).send(result);
 });
 
@@ -289,6 +299,7 @@ app.post(
 		const creatorEmail = req.userEmail;
 		const title = req.body.title;
 		const comId = req.body.comId;
+		const postBody = req.body.postBody;
 		let profile_img_url = "";
 		console.log(title, comId);
 		let creatorId = await client.query(
@@ -296,6 +307,7 @@ app.post(
 			[creatorEmail]
 		);
 		creatorId = creatorId.rows[0].id;
+		
 		if (req.file == undefined) {
 			console.log("yo vro!");
 			profile_img_url = "";
@@ -303,8 +315,8 @@ app.post(
 			profile_img_url = `http://localhost:5000/profile/${req.file.filename}`;
 		}
 		client.query(
-			"insert into posts(comId,postTitle,createdByWhom,timeCreated,votes,postImage) values($1,$2,$3,CURRENT_TIMESTAMP,0,$4)",
-			[comId, title, creatorId, profile_img_url],
+			"insert into posts(comId,postTitle,postBody,createdByWhom,timeCreated,votes,postImage) values($1,$2,$3,$4,CURRENT_TIMESTAMP,0,$5)",
+			[comId, title,postBody ,creatorId, profile_img_url],
 			(error, results) => {
 				if (error) {
 					console.log(error);
@@ -327,7 +339,7 @@ app.get("/checkSameNameCommunity", verifyToken, (req, res) => {
 		[comName],
 		(error, results) => {
 			if (error) {
-				console.error(error);
+				console.error(error);	
 				res.status(500).send("Error fetching posts of a community");
 			} else {
 				console.log(`${results.rowCount}`);

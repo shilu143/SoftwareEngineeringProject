@@ -28,6 +28,7 @@ CREATE TABLE posts (
   postId SERIAL PRIMARY KEY,
   comId INTEGER REFERENCES communities(comId),
   postTitle VARCHAR(100),
+  postBody TEXT,
   createdByWhom INTEGER REFERENCES users(id),
   timeCreated TIMESTAMP,
   votes INTEGER,
