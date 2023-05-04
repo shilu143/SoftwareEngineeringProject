@@ -36,12 +36,12 @@ This is a social aggregation, discussion, and community-driven platform which pr
 - Clone repository
 
 #### 3.2.1 Backend
-- Open `backend` in code editor
+- Open `backend` in code edito
+- In 'backend/App.js', change the password to your own and create database in postgres with the name 'campcom'
 - On terminal
     - $ npm install
     - $ npm run dev
-- App running on `http://localhost:5000/initializeDatabase`
-- In 'backend/App.js', change the password to your own
+- Visit `http://localhost:5000/initializeDatabase` 
 
 #### 3.2.2 Frontend
 - Open `frontend` in code editor
