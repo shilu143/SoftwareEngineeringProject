@@ -9,7 +9,6 @@
 * [Dataflow Diagram](#8-data-flow-diagram)
 * [User Description](#9-user-description)
 * [Workflow](#10-tasks-workflow)
-* [Work Breakdown Structure](#11-work-breakdown-structure)
 
 # 1. Introduction
 A Software Requirements Specification (SRS) document is a comprehensive description of the intended purpose, functionality, and behavior of a software system. The primary purpose of an of this document is to provide a detailed and clear description of the software requirements to stakeholders. Requirements described in this document will be used as guidelines to develop the application.
@@ -42,7 +41,7 @@ Following Features will be provided by our Product:-
 - Users can search for specific content, communities, or users using the search function.
 - Users can create profiles and customize them with a profile picture.
 
-## User Classes & Characteristics (not edited this section)
+## User Classes & Characteristics
 ### Physical Actors → 
 *Users* :- All the users can perform the functions provided by the platform.
 
@@ -55,14 +54,14 @@ Following Features will be provided by our Product:-
 ***
 
 # 3. Block Diagram 
-<img src="" >
+<img src="images/blockDiagram.png" >
 
 ***
 
 # 4. Software Stack
-- Web-based admin portal : 
-- Database : 
-- Authetication :  
+- Web-based portal : ReactJS, NodeJS, Chakra UI
+- Database : PostgreSQL
+- Authetication : JWT Tokens
 ***
 # 5. Features & Requirements
 
@@ -132,7 +131,7 @@ The user wants to comment an exiting post
 <b>POST CONDITION</b>: A new community is created
 </pre>
 
-### 5. Create a Post
+### 6. Create a Post
 <pre>
 • <b>DESCRIPTION & PRIORITY</b>
     User can create a post
@@ -157,11 +156,11 @@ No specific hardware features and requirements.
 ## Interface requirements
 **User Interfaces** The pages shall permit complete navigation and item selection. Login interface, Register Interface, Homepage, User Profile, Posting interface and Create Community interface.
 
-<img src=""> 
+<img src="images/interface1.jpeg"> 
 
-<img src="">
+<img src="images/interface2.jpeg">
 
-<img src="">
+<img src="images/interface3.jpeg">
 
 
 **Hardware Interfaces** No specific hardware interface. The device used to open the software should have internet access.
@@ -185,82 +184,22 @@ System should be secure in terms of user information, user friendly and robust. 
 
 ***
 # 6. Database Requirements (this section not edited)
-**USER** - This collection will contain all the registered users and only these users will be able to login into the system.
-<pre><b>[ User_Type, Username, Email, Mobile No., Encrypted Password ]</b></pre>
-
-**CLASSROOMS** - This collection will contain all the classrooms that can be booked. These classrooms can be booked by users for their use.
-<pre><b>[ Department_Name, Room_Name, Capacity, Slots, Date, Availability_Status ]</b></pre>
-
-**LAB EQUIPMENT** - This collection will contain all the lab equipment that can be booked. These lab equipment can be booked by users for their use.
-<pre><b>[ Department_Name, Lab_Name, Equipments, Slots, Date, Availability_Status ]</b></pre>
-
-**SPORTS COMPLEX** - This collection will have all the sports complexes that can be booked.
-<pre><b>[ Sport_type, Field_name, Slots, Date, Availability_Status ]</b></pre>
-
-**BOOKING RECORD** - This collection will have all the bookings made till now through which a particular booking can be tracked easily.
-<pre><b>[ Booked_By, Booked_On, Booked_Facility_Name, Purpose_Of_Booking, Slot_Booked, Date_Booked ]</b></pre>
-
-**COURSE RECORD** - This collection will have all the details pertaining to the courses being taken.
-<pre><b>[ Course_ID, Professor, Student_ID, Room_Name, Slot, Date, Attedance_Status, Semester, Year ]</b></pre>
+Refer [LLD section](./Low-Level-Design-Document.md#4-database-design)
 
 ***
 # 7. Implementation Details
 ## Assumptions and Dependencies
-- 
-- 
+- A user can make any number of posts
+- Two users can comment at the same time
+- A community can have any number of users
+- Username for every user in unique
+- Posts and comments can be deleted 
 
-## Design and Implementation constraints
-
-
+***
 # 8. Data Flow Diagram
-<img src="">
+<img src="images/dataFlow.jpeg">
 
+*** 
 # 9. User Description
 The application will benefit the residenciaries of IIT Ropar to create, share, and discover content with others in a community-driven environment. The platform allows users to vote on content submissions, with higher-ranked content appearing more prominently on the site. All they need to do is to register on the platform and proceed with enjoying its features.
-
-# 10. Tasks Workflow (this section not edited)
-
-## Week 1
-<pre>
-• Prepare SRS document
-</pre>
-
-## Week 2
-<pre>
-• Design Work breakdown structure
-• Setup basic application activity
-• Setup login and signup activity
-• Database setup and user authentication
-• Preparation of design documents - HLD, LLD
-</pre>
-
-## Week 3 & 4
-<pre>
-• Setup booking portal for all actors
-• Add booking functionality
-</pre>
-
-## Week 5
-<pre>
-• Design website for admin
-• Add required admin functionalities
-• Preparation of test plans
-</pre>
-
-## Week 6
-<pre>
-• Design attendance portal
-• Add location based attendance system
-• Overall feature Integration
-</pre>
-
-## Week 7
-<pre>
-• Testing of software and resolving issues/bugs
-• Continuous build and deployment of software
-• Final deployment of the software
-</pre>
 ***
-
-# 11. Work Breakdown Structure
-<img src="">
