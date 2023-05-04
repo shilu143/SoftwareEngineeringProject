@@ -50,8 +50,6 @@ Below are the detailed description of the modules of our application discussed i
 
 <img src=""></img>
 
-Depicting Flow of both Search and Booking Module
-
 - **Posts Module** - This Module will be used for the new and existing posts, and the comments on those posts.
 
 <img src=""></img>
