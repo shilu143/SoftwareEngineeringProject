@@ -5,11 +5,14 @@
 * [Database Design](#4-database-design)
 
 # 1. Introduction
-The purpose of this low-level design document(LLDD) is to give the internal logical design of the actual program code. Low-level design is created based on the provided high-level design. LLD describes the class diagrams with the methods and relations between classes and program specifications. It describes the modules & proper analysis of project design so that the programmer can directly code the program from this document with minimal debugging and testing.
+
+The purpose of a Low-Level Design (LLD) document is to provide a detailed description of the software design at a lower level of abstraction than the High-Level Design (HLD) document. An LLD document typically includes a more detailed description of each component of the system and how they interact with each other.
+
+The LLD document is typically created after the HLD document, and it serves as a blueprint for the implementation phase of the software development lifecycle. The LLD document provides developers with the detailed information they need to write the code for each component of the system.
 
 ***
 
-# 2. Classes
+# 2. Classes (not edited from here on)
 Below are the detailed description of the major classes of our application discussed in high level design document.
 - **App** - The main class for our application. All the search methods will be given to the app class.
 - **User** - The class will contain objects of users who will be accessing the application for booking and other facilities. All the attributes and methods have been shown in the detailed diagram.
@@ -148,7 +151,3 @@ This database might change to some extent during development process for better 
 
 
 ***
-
-
-## References
-* [https://en.wikipedia.org/wiki/Low-level_design](https://en.wikipedia.org/wiki/Low-level_design)
