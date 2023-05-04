@@ -41,6 +41,7 @@ This is a social aggregation, discussion, and community-driven platform which pr
     - $ npm install
     - $ npm run dev
 - App running on `http://localhost:5000/initializeDatabase`
+- In 'backend/App.js', change the password to your own
 
 #### 3.2.2 Frontend
 - Open `frontend` in code editor
