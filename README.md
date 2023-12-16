@@ -62,8 +62,8 @@ This is a social aggregation, discussion, and community-driven platform which pr
 
 ### Contributors
 * [Ashish Alok](https://github.com/AshishAlok) - 2020CSB1076
-* [Nishant Sharma]() - 2020CSB1102
-* [Shaurya PS Bisht](https://github.com/Shaurya-Ps-Bisht) - 2020CSB1125
+* [Nishant Verma]() - 2020CSB1102
+* [Shaurya Pratap Singh Bisht](https://github.com/Shaurya-Ps-Bisht) - 2020CSB1125
 * [Shilu Tudu](https://github.com/shilu143) - 2020CSB1126
 * [Sudhanshu Kumar](https://github.com/prateek697) - 2019CSB1123
 
